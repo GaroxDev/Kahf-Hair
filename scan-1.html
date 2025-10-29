@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hair Scan - Decoding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            /* Font umum */
+        }
+
+        body {
+            background-image: url('public/assets/images/background.jpg');
+            /* Menggunakan background.jpg */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            /* Tengahkan vertikal */
+            justify-content: center;
+            /* Tengahkan horizontal */
+            padding: 20px;
+            /* Padding agar konten tidak terlalu mepet tepi */
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 420px;
+            /* Lebar konsisten dengan halaman kuis sebelumnya */
+            margin: 0 auto;
+            /* Pastikan di tengah */
+            display: flex;
+            /* Untuk menata logo dan decoding box */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 25px;
+            /* Jarak antara logo dan "decoding" box */
+        }
+
+        .logo-section img {
+            height: 50px;
+            /* Tinggi logo, disesuaikan agar tidak terlalu besar */
+            width: auto;
+        }
+
+        .logo-section .supported-by {
+            font-size: 9px;
+            color: #3a3a3a;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-section .shopee {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            padding: 2px 7px;
+            border-radius: 2px;
+            margin-left: 3px;
+        }
+
+        .logo-section .shopee-icon {
+            width: 11px;
+            height: 11px;
+            background: #ee4d2d;
+            margin-right: 3px;
+            border-radius: 1px;
+        }
+
+        .logo-section .shopee-text {
+            color: #ee4d2d;
+            font-weight: bold;
+            font-size: 9px;
+        }
+
+        .decoding-box {
+            background: #a8a8a8;
+            /* Warna abu-abu dari gambar */
+            padding: 15px 30px;
+            /* Sesuaikan padding */
+            text-align: center;
+            border-radius: 8px;
+            /* Sedikit rounded corner */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* Pastikan posisinya di tengah vertikal sesuai gambar */
+            margin-top: 150px;
+            /* Atur ini untuk menggeser ke bawah sesuai gambar */
+        }
+
+        .decoding-text {
+            color: #ffffff;
+            /* Warna teks putih */
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="logo-section">
+            <img src="public/assets/images/logo.png" alt="Kahf Decode Logo">
+        </div>
+
+        <div class="decoding-box">
+            <div class="decoding-text">WE'RE DECODING YOUR HAIR...</div>
+        </div>
+    </div>
+
+    <script>
+        // Opsional: Redirect setelah beberapa detik
+        setTimeout(() => {
+            window.location.href = 'scan-2.html';
+        }, 3000); // Redirect setelah 3 detik
+    </script>
+</body>
+
+</html>
