@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahf Decode | AI Hair Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: url('public/assets/images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+            max-width: 768px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            margin-top: 70px;
+            text-align: center;
+        }
+
+        .logo-section img {
+            width: 280px;
+            height: auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: -60px;
+        }
+
+        .ai-analyzer-img {
+            width: 400px;
+            height: auto;
+            margin-bottom: 40px;
+        }
+
+        /* Scan Button */
+        .scan-section {
+            margin-bottom: 20px;
+        }
+
+        .btn-scan {
+            background: linear-gradient(180deg, #e0ff33 0%, #c8f000 100%);
+            border: none;
+            padding: 16px 100px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            transition: all 0.3s ease;
+            color: #1a1a1a;
+        }
+
+        .btn-scan:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+            background: linear-gradient(180deg, #f0ff55 0%, #d6ff00 100%);
+        }
+
+        .btn-scan:active {
+            transform: translateY(0);
+        }
+
+        /* Bottom Link */
+        .bottom-section {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #2d2d2d;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .bottom-section a {
+            color: #2d2d2d;
+            text-decoration: underline;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .bottom-section a:hover {
+            color: #1a1a1a;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes slideUp {
+            from { 
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            padding: 40px 30px 25px;
+            background: white;
+        }
+
+        .modal-logo {
+            width: 180px;
+            margin-bottom: 25px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a1a1a;
+            letter-spacing: 3px;
+            margin-bottom: 0;
+        }
+
+        .modal-body {
+            padding: 0;
+            background: white;
+        }
+
+        .form-gradient {
+            background: linear-gradient(180deg, #e8f5a0 0%, #f5f9d8 50%, #fafae8 100%);
+            padding: 35px 30px;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'Courier New', Courier, monospace;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .form-input::placeholder {
+            color: #b0b0b0;
+            font-size: 12px;
+        }
+
+        .checkbox-section {
+            background: #e8e8e8;
+            padding: 25px 30px;
+        }
+
+        .checkbox-group {
+            margin-bottom: 12px;
+        }
+
+        .checkbox-group:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 11px;
+            color: #4a4a4a;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-top: 1px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .button-section {
+            background: #e8e8e8;
+            padding: 0 30px 35px;
+        }
+
+        .btn-next {
+            width: 100%;
+            background: #d8d8d8;
+            border: none;
+            padding: 16px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-radius: 10px;
+            cursor: not-allowed;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+
+        .btn-next:hover {
+            background: #d8d8d8;
+        }
+
+        .btn-next.active {
+            background: linear-gradient(180deg, #e0ff33 0%, #c8f000 100%);
+            color: #1a1a1a;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-next.active:hover {
+            background: linear-gradient(180deg, #f0ff55 0%, #d6ff00 100%);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive untuk layar lebih kecil */
+        @media (max-width: 768px) {
+            .logo-section {
+                margin-top: 50px;
+            }
+
+            .logo-section img {
+                width: 240px;
+            }
+
+            .ai-analyzer-img {
+                width: 350px;
+            }
+
+            .btn-scan {
+                padding: 14px 80px;
+                font-size: 16px;
+            }
+
+            .bottom-section {
+                margin-bottom: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-section {
+                margin-top: 40px;
+            }
+
+            .logo-section img {
+                width: 200px;
+            }
+
+            .ai-analyzer-img {
+                width: 300px;
+            }
+
+            .btn-scan {
+                padding: 12px 60px;
+                font-size: 14px;
+            }
+
+            .bottom-section {
+                font-size: 12px;
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+            <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img src="public/assets/images/logo.png" alt="Kahf Decode Logo">
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <img src="public/assets/images/home-ai-hair.png" alt="AI Hair Analyzer" class="ai-analyzer-img">
+            
+            <!-- Scan Button -->
+            <div class="scan-section">
+                <button class="btn-scan">SCAN QR</button>
+            </div>
+
+            <!-- Bottom Link -->
+            <div class="bottom-section">
+                NO QR CODE? <a href="#" id="openModal">FILL FORM HERE</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Register -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="public/assets/images/logo.png" alt="Kahf Decode" class="modal-logo">
+                <div class="modal-title">REGISTER TO CODE</div>
+            </div>
+            
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-gradient">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Whatsapp Number</label>
+                            <input type="tel" class="form-input" placeholder="Enter your WhatsApp number" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Age</label>
+                            <input type="number" class="form-input" placeholder="Enter your age" required>
+                        </div>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="privacy">
+                            <span>See our Privacy Policy for more information.</span>
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="promo">
+                            <span>I agree receive promotional and further information from Kahf</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-next" id="btnNext">NEXT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('registerModal');
+        const openModalBtn = document.getElementById('openModal');
+        const form = document.getElementById('registerForm');
+        const btnNext = document.getElementById('btnNext');
+        const inputs = form.querySelectorAll('.form-input');
+        const privacyCheck = document.getElementById('privacy');
+        const promoCheck = document.getElementById('promo');
+
+        // Open modal
+        openModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Check form validity
+        function checkFormValidity() {
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allFilled = false;
+                }
+            });
+            
+            if (allFilled && privacyCheck.checked && promoCheck.checked) {
+                btnNext.classList.add('active');
+            } else {
+                btnNext.classList.remove('active');
+            }
+        }
+
+        // Add event listeners
+        inputs.forEach(input => {
+            input.addEventListener('input', checkFormValidity);
+        });
+
+        privacyCheck.addEventListener('change', checkFormValidity);
+        promoCheck.addEventListener('change', checkFormValidity);
+
+        // Form submit
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your form submission logic here
+            console.log('Form submitted');
+        });
+    </script>
+</body>
+</html>
