@@ -1,0 +1,2724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/images/favicon.png" sizes="any" />
+  <title>KAHF Virtual Hair Try-On 2025</title>
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+  
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/hair-style.css">
+  <script>
+    let eulerY = 0;
+  </script>
+  <script type="module" src="/assets/js/owl.carousel.min.js"></script>
+  <script src="/assets/js/three.min.js"></script>
+  <script src="/assets/js/GLTFLoader.js"></script>
+  <!-- <script type="module" src="/assets/js/OrbitControls.js"></script> -->
+  <script src="/assets/js/dom-to-image.min.js"></script>
+  <script src="/assets/js/jquery-3.6.0.min.js"></script>
+  <script type="module" src="/assets/js/model-viewer.min.js"></script>
+  <script src="/assets/js/qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.114.0/examples/js/loaders/RGBELoader.js"></script> -->
+
+  <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
+</head>
+
+
+<body>
+  <div class="kahf-container">
+    <section id="home-page-hair" class="home-page kahf-screen">
+      <img class="logo" src="/assets/images/comp-home.png" alt="">
+      <div class="button-wrapper d-flex justify-content-center align-items-center">
+        <button id="button-scan-qr" class="kahf-btn kahf-btn-accent d-none">
+          SCAN QR
+        </button>
+        <div id="qr-popup" class="qr-popup">
+          <div class="qr-popup-content">
+            <span class="qr-close">&times;</span>
+            <h2>Scan QR Code</h2>
+            <div id="qr-reader" style="width: 300px; height: 300px; margin-top: 10px;"></div>
+          </div>
+        </div>
+        <button id="button-fill-form" class="kahf-btn kahf-btn-accent d-none">
+          FILL FORM
+        </button>
+        <div id="instruct-home" class="instruct d-none">NO QR? START HERE</div>
+        <div class="splash-loading justify-content-center align-items-center">
+          <img src="./assets/images/loader-start.png" class="me-2">
+          <img src="./assets/images/loader-bg.png" class="bg-load" style="position: absolute; width: 100%; height: 100%;">
+        </div>
+      </div>
+    </section>
+    <section id="register-form" class="p-0 register kahf-screen regist hidden" >
+      <img class="icon-back" src="/assets/images/back-icon.png" alt="">
+      <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+      <div class="title" style="padding: 15%;">
+        <h2>REGISTER <br>
+        TO DECODE</h2>
+        <h3>FILL IN YOUR DETAILS TO UNLOCK THE EXPERIENCE.</h3>
+        <form id="regist-form">
+          <div class="input-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" class="name" placeholder="Enter your full name" required>
+            <div class="error-validation" style="display:none;">Name can't be empty</div>
+          </div>
+          <div class="input-group">
+            <label for="phone">WhatsApp Number</label>
+            <input type="number" id="phone" class="phone" placeholder="Enter your WhatsApp number" required inputmode="numeric" pattern="[0-9]*" maxlength="13">
+            <div class="error-validation" style="display:none;">Invalid phone number</div>
+          </div>
+          <div class="input-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" class="age" placeholder="Enter your age" required inputmode="numeric" pattern="[0-9]*" maxlength="2">
+            <div class="error-validation" style="display:none;">Age can't be empty</div>
+          </div>
+        </form>
+        <div class="checkbox-group">
+        <label class="checkbox-item">
+          <input type="checkbox" id="privacy-required" required>
+          <span class="checkbox-span">See our <a target="_blank" href="https://www.kahfeveryday.com/en/terms-conditions/">Privacy Policy</a> for more information.</span>
+        </label>
+        <label class="checkbox-item-2">
+          <input type="checkbox" id="privacy">
+          <span  class="checkbox-span-2">I agree to receive promotional & further information from Kahf (Optional)</span>
+        </label>
+      </div>
+        <button type="submit" id="regist-submit-btn" class="kahf-btn kahf-btn-accent disabled" disabled>NEXT</button>
+      </div>
+      <div class="component">
+        <img src="./assets/images/comp-left.png" class="comp-left">
+        <img src="./assets/images/comp-right.png" class="comp-right">
+      </div>
+    </section>
+    <section id="hair-analyzer-splash" class="p-0 register kahf-screen regist hidden">
+  <img class="icon-back" src="/assets/images/back-icon.png" alt="">
+  <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+  <div class="title" style="padding: 10%;">
+    <h2>START HAIR<br>ANALYSIS</h2>
+    <h3>WE ARE GOING TO TAKE A SELFIE TO ANALYZE YOUR HAIR.</h3>
+    <div class="instruction-wrap mb-5 pb-2">
+          <div class="instruction-item">
+            <img src="/assets/images/inst1.png" alt="">
+          </div>
+          <div class="instruction-item">
+            <img src="/assets/images/inst2.png" alt="">
+          </div>
+          <div class="instruction-item">
+            <img src="/assets/images/inst3.png" alt="">
+          </div>
+          <div class="instruction-item">
+            <img src="/assets/images/inst4.png" alt="">
+            <!-- <p>Keep neutral<br />expression</p> -->
+          </div>
+        </div>
+    <div class="checkbox-group-2">
+      <label class="checkbox-item">
+        <input type="checkbox" id="privacy2-required" required>
+        <span class="checkbox-span">
+          If you upload a selfie, the image will be used to provide more precise recommendations <br>
+          that may be of interest to you. The image is deleted after being analyzed.
+        </span>
+      </label>
+      <label class="checkbox-item-2">
+        <input type="checkbox" id="privacy" style="display: none;">
+        <span class="checkbox-span target">
+          See our <a target="_blank" href="https://www.kahfeveryday.com/en/terms-conditions/">Privacy Policy</a>
+          for more information.
+        </span>
+      </label>
+    </div>
+    <button type="submit" id="agree-instruction-btn" class="kahf-btn kahf-btn-accent disabled" disabled>
+      NEXT
+    </button>
+  </div>
+  <div class="component">
+    <img src="./assets/images/comp-left.png" class="comp-left">
+    <img src="./assets/images/comp-right.png" class="comp-right">
+  </div>
+</section>
+    <section id="face-scan-hair" class="face-scan p-0 kahf-screen page-stye-1 hidden">
+      <div class="header">
+        <img class="icon-back" src="/assets/images/back-icon.png" alt="">
+        <img class="logo-decode-1" src="/assets/images/kahf-logo.png" alt="">
+      </div>
+      <img src="./assets/images/comp-scanLeft.png" class="comp-scanLeft">
+      <img src="./assets/images/comp-scanRight.png" class="comp-scanRight">
+      <div id="face-scan-container" class="mb-3">
+        <div class="scanner-line d-none"></div>
+        <div class="scan-border">
+          <div class="intro-text">
+        <h2 class="greeting">HAI</h2>
+        <p class="desc">
+          WE'LL ANALYZE YOUR FACE SHAPE TO SUGGEST SUITABLE HAIRSTYLES AND PRODUCTS.
+        </p>
+      </div>
+        </div>
+        <img class="ellipse" src="/assets/images/border-square.png" alt="">
+        <div class="scan-helper-container" id="scan-helper">
+          <div class="scan-helper-text" id="scan-helper-text"></div>
+          <!-- <div class="scan-progress">
+            <div class="progress-bar" id="scan-progress"></div>
+          </div> -->
+        </div>
+      </div>
+      <button id="scan-btn" class="kahf-btn kahf-btn-accent">
+        <span style="font-family: 'Fira Code';">SCAN</span>
+      </button>
+    </section>
+    <section id="page-question-hair" class="question p-0 kahf-screen page-stye-1 hidden">
+      <div class="header">
+      <img class="icon-back" src="/assets/images/back-icon.png" alt="">
+      </div>
+      <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+      <img class="comp-logo" src="./assets/images/comp-left.png" alt="">
+      <div class="heading-with-image flex items-center gap-4">
+        <div class="question-hair-wrapper">
+          <h2>APA TIPE RAMBUTMU?</h2>
+          <div class="question-wrapper2 question-text-container">
+            <div class="" style="width: 200px; height: 235px; margin-top: 30%;">
+              <!-- <span style ="position: relative; top: -28px;">YOUR PHOTO</span> -->
+            <img id="your-photo" src="./assets/images/Straight-Model.png" alt="Your Photo">
+          </div>
+        </div>
+      </div>
+      <div class="question-wrapper question-text-container">
+        <div class="question-list question-text" data-value="Straight" id="button-to-hairstyle1">
+          <span>Straight</span>
+          <p>Straight</p>
+          <img src="./assets/images/Straight-1.png">
+        </div>
+        <div class="question-list question-text" data-value="Wavy" id="button-to-hairstyle2">
+          <span>Wavy</span>
+          <p>Wavy</p>
+          <img src="./assets/images/Wavy-1.png">
+        </div>
+        <div class="question-list question-text" data-value="Curly" id="button-to-hairstyle3">
+          <span>Curly</span>
+          <p>Curly</p>
+          <img src="./assets/images/Curly-1.png">
+        </div>
+        <div class="question-list question-text" data-value="Tight Curly" id="button-to-hairstyle4">
+          <span>Tight Curly</span>
+          <p>Tight Curly</p>
+          <img src="./assets/images/Tight Curly-1.png">
+        </div>
+      </div>
+      <button id="submit-btn" class="kahf-btn kahf-btn-accent disabled">
+        <span style="font-family: 'Fira Code';">NEXT</span>
+      </button>
+    </section>
+    <section id="loading-screen" class="loading p-0 kahf-screen page-stye-1 hidden">
+      <div class="header">
+      </div>
+      <!-- <img class="logo" src="/assets/images/loading-logo.png" alt=""> -->
+      <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+      <img class="logo-desc" src="/assets/images/kahf-desc.png" alt="">
+      <div class="result-loading justify-content-center align-items-center">
+          <i class="custom-spinner me-2"></i>
+          <span>Please Wait</span>
+        </div>
+    </section>
+    <!-- <section id="face-result-screen" class="kahf-screen hidden">
+      <img class="logo mb-5" width="30%" style="max-width: 200px;" src="/assets/images/logo-hair.png" alt="">
+      <button class="kahf-btn kahf-btn-accent back-btn">
+        <span>Back</span>
+      </button>
+      <div class="face-shape-card">
+        <div class="d-flex gap-5 justify-content-center mb-4">
+          <div class="wrapper-captured captured-left">
+            <img id="preview-img" src="/assets/images/default.png" alt="Preview">
+            <div class="shape-name">Your Photo</div>
+          </div>
+          <div class="wrapper-captured captured-right">
+            <img id="result-img" src="/assets/images/default.png" alt="Result">
+            <div class="shape-name" id="result-shape">Result</div>
+          </div>
+        </div>
+        <div class="face-shape-info mb-4">
+          <p class="mb-2 shape-title">Face Shape Result</p>
+          <p class="shape-desc" id="shape-desc">
+            Upload your face photo to get recomendation.
+          </p>
+        </div>
+      </div>
+    <button id="result-continue-btn" class="kahf-btn kahf-btn-accent">
+      CONTINUE
+    </button>
+    </section> -->
+    <section id="hairstyle-screen" class="hairstyle kahf-screen page-stye-2 hidden">
+      <img class="icon-back" src="/assets/images/back-icon.png" alt="">
+      <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+      <div class="scene-container">
+        <canvas id="renderCanvas1"></canvas>
+      </div>
+      <div class="hairstyle-wrapper">
+        <h2 class="greeting-2">HAI</h2>
+        <div class="hairstyle-name-2">
+          QUIFF
+        </div>
+        <div class="hair-style">
+          YOUR HAIRSTYLE IS A
+        </div>
+        <div class="face-desc" id="face-desc">
+            <p>The most balanced and versatile face shape, with a slightly wider forehead than jawline. Almost any hairstyle works well, from short, sharp crops to longer, layered looks, giving you the freedom to experiment. </p>
+          </div>
+          <div class="rotate-controls">
+            <input type="range" min="-0.35" max="0.35" step="0.01" value="0" id="rotationSlider">
+          </div>
+        <!-- Three.js Container - Single consistent element -->
+        <div class="hairstyle-grid">
+          <div id="hairstyle-grid-inner-two" class="hairstyle-grid-inner-two">
+            <!-- Default hairstyle shown on page load -->
+            <div class="hairstyle-item active" data-model-index="0">
+              <div class="hairstyle-img">
+                <model-viewer src="/assets/models/model-quiff.glb" alt="A 3D model" style="--poster-color: transparent;">
+                  <div slot="poster"></div>
+                  <div slot="progress-bar"></div>
+                </model-viewer>
+              </div>
+              <span>FRINGE</span>
+              <img class="hairstyle-prod" src="./assets/images/hair-powder.png">
+              <div class="hairstyle-name">FRINGE</div>
+            </div>
+            <div class="hairstyle-item" data-model-index="1">
+              <div class="hairstyle-img">
+                <model-viewer src="/assets/models/model-layered.glb" alt="A 3D model" style="--poster-color: transparent;">
+                  <div slot="poster"></div>
+                  <div slot="progress-bar"></div>
+                </model-viewer>
+              </div>
+              <span>LAYERED</span>
+              <img class="hairstyle-prod" src="./assets/images/pomade-matte.png">
+              <div class="hairstyle-name">LAYERED</div>
+            </div>
+            <div class="hairstyle-item" data-model-index="2">
+              <div class="hairstyle-img">
+                <model-viewer src="/assets/models/model-slickback.glb" alt="A 3D model" style="--poster-color: transparent;">
+                  <div slot="poster"></div>
+                  <div slot="progress-bar"></div>
+                </model-viewer>
+              </div>
+              <span>SLICK BACK</span>
+              <img class="hairstyle-prod" src="./assets/images/pomade-sleek.png">
+              <div class="hairstyle-name">SLICK BACK</div>
+            </div>
+          </div>
+        </div>
+        
+        <button id="button-style-vault" class="kahf-btn kahf-btn-accent button-small">
+          MORE HAIR STYLE (200)
+        </button>
+      </div>
+      <button id="hairstyle-continue-btn" class="kahf-btn kahf-btn-accent">
+        NEXT
+      </button>
+      <img src="./assets/images/comp-left.png" class="comp-left">
+    </section>
+    <!-- Hairstyle List Selection Screen -->
+    <section id="hairstyle-list-screen" class="p-0 kahf-screen page-stye-1 hidden"> 
+      
+        <div class="header">
+          <img class="icon-back" src="/assets/images/back-icon.png" alt="">
+          <img class="logo-decode-1" src="/assets/images/kahf-logo.png" alt="">
+          <img src="./assets/images/comp-left.png" class="comp-left-2">
+        </div>
+        
+        <!-- FULL HAIRSTYLE GRID -->
+        <div class="hairstyle-grid">
+          <div class="hairstyle-grid-inner">
+            <div id="hairstyle-grid-inner-list" class="hairstyle-grid-inner-list">
+              <div class="loading-indicator">
+                <p class="loading-hair">Loading hairstyles...</p>
+              </div>
+              <!-- All processed hairstyles will be rendered here dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <button id="back-to-top" class="kahf-btn kahf-btn-accent">
+          BACK TO TOP 
+        </button>
+      
+        <div class="hairstyle-wrapper-2">
+          <span class="hairstyle-list-title">HAIRSTYLE</span>
+        </div>
+    </section>
+
+    <!-- Product Recommendation Screen -->
+    <section id="product-hair-screen" class="p-0 kahf-screen page-stye-1 hidden" style="overflow-y: auto;">
+      <div class="header">
+        <img class="icon-back" src="/assets/images/back-icon.png" alt="">
+        <span class="title-decode">/DECODE HAIR</span>
+        <span class="title-name">NAME : </span>
+      </div>
+      <div class="result-wrapper" style="width: 100%; aspect-ratio: calc(6 / 2);">
+        <div class="result-card" style="display: block; width: 100%;">
+        <div class="result-grid" style="display: flex; width: 100%; height: 100%;">
+          <div class="haircut">
+            <div class="info face-shape">
+            <h3 style="font-size: 17px;">FACE SHAPE:</h3>
+            <div class="value" id="face-type">OVAL</div>
+            <img id="face-shape-img" src="./assets/images/oval-1.png" alt="Oval">
+            </div>
+          </div>
+          <div class="haircut-2">
+            <div class="info hair-type">
+            <h4>HAIR TYPE:</h4>
+            <div class="value hair-type-detail">CURLY</div>
+            <img class="result-hair-type" src="./assets/images/curly.png" alt="Curly">
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="sidebar-prod">
+        HAIRSTYLE
+      </div>
+      <div class="product-card">
+        <div class="carousel-window">
+          <div class="carousel-track">
+            <div class="model-img-2 model-img-wrapper" data-index="0" style="overflow: hidden;">
+            <canvas id="renderCanvas2"></canvas>
+            </div>
+            <div class="model-img model-img-wrapper active" data-index="1" style="overflow: hidden;">
+              <canvas id="renderCanvas4"></canvas>
+            </div>
+            <div class="model-img-3 model-img-wrapper" data-index="2" style="overflow: hidden;">
+              <canvas id="renderCanvas3"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="change-hair">
+        <img src="./assets/images/Left-btn.png" class="changeLeft">
+        <div class="hair-name">QUIFF</div>
+        <img src="./assets/images/Right-btn.png" class="changeRight">
+      </div>
+      <div class="info product">
+        <h5>PRODUCTS RECOMMENDATION</h5>
+        <div class="prod-detail">
+          <img id="prod-img" src="./assets/images/pomade-sleek.png" alt="Kahf">
+          <span>HAIR STYLING:</span>
+          <p id="prod-text">KAHF SLEEK CLASSY <br> WATER BASED POMADE</p>
+        </div>
+      </div>
+      <div class="group-button d-flex gap-4 button-inline-wrapper justify-content-center align-items-center">
+        <button id="finish-page-hair-product" class="button-to-home kahf-btn kahf-btn-accent" style="width: 30%;">
+          FINISH
+        </button>
+        <button id="download-result" class="kahf-btn kahf-btn-accent" style="width: 30%; pointer-events: none; display: none;">
+          DOWNLOAD
+        </button>
+        <!-- <button id="share-result" class="kahf-btn kahf-btn-accent" style="width: 30%" onclick="generateResultQR()">
+          SHARE
+        </button>
+        <div id="qrModal" class="qr-modal">
+          <div class="qr-modal-content">
+            <span class="close">&times;</span>
+            <h3 class="qr-text">Scan QR Code For Share Your Result</h3>
+            <div id="qr_image_modal" style="display: inline-block;">
+            </div>
+          </div>
+        </div> -->
+    </section>
+  </div>
+
+  <div id="captured-photo">
+  </div>
+
+    <script type="importmap">
+      {
+      "imports": {
+        "three": "/assets/js/three.module.js",
+        "three/addons/": "/assets/js/three/addons/",
+        "mindar-face-three":"/assets/js/mindar-face-three.prod.js"
+      }
+    }
+  </script>
+
+ <script>
+  async function loadYourPhoto() {
+    try {
+      const res = await fetch("/api/latest-face");
+      const data = await res.json();
+
+      if (data.success && data.face_base64) {
+        const imgEl = document.getElementById("your-photo");
+        imgEl.src = `data:image/png;base64,${data.face_base64}`;
+        latestFaceBase64 = `data:image/png;base64,${data.face_base64}`;
+      validateForm();
+      }
+    } catch (err) {
+      console.error("Failed to load your photo:", err);
+    }
+  }
+
+  const hairstyleFiles = {
+    "Oval": {
+    "STRAIGHT": [
+      { model: '/assets/models/Model Hair/Oval/STRAIGHT/oval_straight_01 BuzzCut.glb', name: 'BUZZ CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Oval/STRAIGHT/oval_straight_02 TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Oval/STRAIGHT/oval_straight_03 TexturedQuiff.glb', name: 'TEXTURED QUIFF', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/Model Hair/Oval/WAVY/oval_wavy_01 LayeredWaves.glb', name: 'LAYERED WAVES', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Oval/WAVY/oval_wavy_02 Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Oval/WAVY/oval_wavy_03 SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/Model Hair/Oval/CURLY/oval_curly_01 FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Oval/CURLY/oval_curly_02 SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Oval/CURLY/oval_curly_03 TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "TIGHT CURLY": [
+      { model: '/assets/models/Model Hair/Oval/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Oval/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Oval/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ]
+  },
+  "Diamond": {
+    "STRAIGHT": [
+      { model: '/assets/models/Model Hair/Diamond/WAVY/diamond_wavy_01 FrenchCrop.glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' }, //ganti ini nunggu model '/assets/models/Model Hair/Diamond/STRAIGHT/diamond_straight_01 Fringe.glb'
+      { model: '/assets/models/Model Hair/Diamond/STRAIGHT/diamond_straight_02 HighFade.glb', name: 'HIGH FADE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Diamond/STRAIGHT/diamond_straight_03 TexturedCrop.glb', name: 'TEXTURED CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/Model Hair/Diamond/WAVY/diamond_wavy_01 FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Diamond/WAVY/diamond_wavy_02_.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/Model Hair/Diamond/WAVY/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/Model Hair/Diamond/WAVY/diamond_wavy_03 TexturedWaves.glb', name: 'TEXTURE WAVES', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/Model Hair/Diamond/CURLY/diamond_curly_01 Fringe(1).glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Diamond/CURLY/diamond_curly_02 HighTopCurls(1).glb', name: 'HIGH TOP CURLS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Diamond/CURLY/diamond_curly_03 LayeredTapered(1).glb', name: 'LAYERED TAPERED', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "TIGHT CURLY": [
+      { model: '/assets/models/Model Hair/Diamond/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Diamond/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Diamond/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ]
+  },
+  "Oblong": {
+    "STRAIGHT": [
+      { model: '/assets/models/Model Hair/Oblong/STRAIGHT/Straight_CrewCut.glb', name: 'CREW CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Oblong/STRAIGHT/Straight_SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Oblong/STRAIGHT/Straight_SlickBack.glb', name: 'SLICK BACK', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/Model Hair/Oblong/WAVY/Wavy_CrewCut.glb', name: 'CREW CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Oblong/WAVY/Wavy_SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Oblong/WAVY/Wavy_TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/Model Hair/Oblong/CURLY/Curly_Fringe.glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Oblong/CURLY/Curly_LowTapper.glb', name: 'LOW TAPPER', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Oblong/CURLY/Curly_MediumCurls.glb', name: 'MEDIUM CURLS', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "TIGHT CURLY": [
+      { model: '/assets/models/Model Hair/Oblong/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Oblong/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Oblong/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ]
+  },
+  "Square": {
+    "STRAIGHT": [
+      { model: '/assets/models/Model Hair/Rectangle/STRAIGHT/CombOver.glb', name: 'COMB OVER', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Rectangle/STRAIGHT/RectangleStraightSidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Rectangle/STRAIGHT/SlickBack.glb', name: 'SLICK BACK', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/Model Hair/Rectangle/WAVY/Layered.glb', name: 'LAYERED', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Rectangle/WAVY/MediumLengthTaper.glb', name: 'MEDIUM LENGTH TAPER', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Rectangle/WAVY/SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/Model Hair/Rectangle/CURLY/CurlyUndercut.glb', name: 'UNDERCUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Rectangle/CURLY/Fringe.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Rectangle/CURLY/ShortTapered.glb', name: 'SHORT TAPERED', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "TIGHT CURLY": [
+      { model: '/assets/models/Model Hair/Rectangle/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Rectangle/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Rectangle/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ]
+  },
+  "Round": {
+    "STRAIGHT": [
+      { model: '/assets/models/Model Hair/Round/STRAIGHT/Straight_Caesar.glb', name: 'CAESAR', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Round/STRAIGHT/Straight_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Round/STRAIGHT/Straight_Pompadour.glb', name: 'POMPADOUR', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/Model Hair/Round/WAVY/Wavy_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Round/WAVY/Wavy_Fringe.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Round/WAVY/Wavy_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/Model Hair/Round/CURLY/Curly_MulletModern.glb', name: 'MULLET', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Round/CURLY/Curly_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Round/CURLY/Curly_TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "TIGHT CURLY": [
+      { model: '/assets/models/Model Hair/Round/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Round/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Round/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ]
+  },
+  "Triangle": {
+    "STRAIGHT": [
+      { model: '/assets/models/Model Hair/Triangle/STRAIGHT/Medium-LengthSidePart.glb', name: 'SIDE PART', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Triangle/STRAIGHT/Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Triangle/STRAIGHT/SpikyCut.glb', name: 'SPIKY CUT', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/Model Hair/Triangle/WAVY/FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Triangle/WAVY/MediumLengthWaves.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Triangle/WAVY/TriangleWavySidePart.glb', name: 'QUIFF', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/Model Hair/Triangle/CURLY/HighTopCurls.glb', name: 'HIGH TOP CURLS', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Triangle/CURLY/TaperedFade.glb', name: 'TAPERED FADE', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Triangle/CURLY/TriangleCurlySidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "TIGHT CURLY": [
+      { model: '/assets/models/Model Hair/Triangle/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/Model Hair/Triangle/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/Model Hair/Triangle/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ]
+  },
+}
+
+  // Load the photo when the page is ready
+  window.addEventListener("DOMContentLoaded", loadYourPhoto);
+  const qrPopup = document.getElementById("qr-popup");
+  const openQrBtn = document.getElementById("button-scan-qr"); // tombol scan
+  const closeQrBtn = document.querySelector(".qr-close");
+
+  let html5QrCode;
+  let hairType = "";
+
+  openQrBtn.addEventListener("click", () => {
+  qrPopup.style.display = "flex";
+    qrPopup.classList.remove("hide");
+    qrPopup.classList.add("show");
+
+    html5QrCode = new Html5Qrcode("qr-reader");
+
+    html5QrCode.start(
+    { facingMode: "user" },
+    { fps: 10, qrbox: 250 },
+      (decodedText) => {
+        console.log(`QR Code hasil: ${decodedText}`);
+      closePopup();
+      showScreen("scanHair");
+      },
+      (errorMessage) => {
+        console.log("Scanning error:", errorMessage);
+      }
+    ).catch((err) => {
+      console.error("Tidak bisa akses kamera:", err);
+    });
+  });
+
+  function closePopup() {
+    qrPopup.classList.remove("show");
+    qrPopup.classList.add("hide");
+
+    if (html5QrCode) {
+    html5QrCode.stop().then(() => {
+      console.log("Kamera berhenti");
+    }).catch(err => console.warn("Gagal stop kamera:", err));
+    }
+
+    setTimeout(() => {
+      qrPopup.style.display = "none";
+  }, 300);
+  }
+
+  closeQrBtn.addEventListener("click", closePopup);
+
+  window.addEventListener("click", (e) => {
+    if (e.target === qrPopup) {
+      closePopup();
+    }
+  });
+
+  function showScreen(screenName) {
+    Object.values(screens).forEach(screen => {
+    screen.classList.add('hidden');
+    });
+  screens[screenName].classList.remove('hidden');
+  }
+  // Screen navigation
+  const screens = {
+    profile: $('#profile-screen'),
+    splash: $('#splash-screen'),
+    landing: $('#landing-screen'),
+    startScan: $('#start-qr-screen'),
+    loading: $('#loading-screen'),
+    // hair
+    homePageHair: $('#home-page-hair'),
+    scan: $('#face-scan-screen'),
+    result: $('#face-result-screen'),
+    hairstyle: $('#hairstyle-screen'),
+    pageQuestionHair: $('#page-question-hair'),
+    hairstyleList: $('#hairstyle-list-screen'),
+    registForm: $('#register-form'),
+    product: $('#product-hair-screen'),
+    scanAnalyzer: $('#skin-analyzer-splash'),
+    scanHairAnalyzer: $('#hair-analyzer-splash'),
+    scanSkin: $('#face-scan-skin'),
+    scanHair: $('#face-scan-hair'),
+    scanAnalyzerSelection: $('#skin-analyzer-selection'),
+    homePage: $('#home-page'),
+    pageForm: $('#page-form'),
+    pageIntro: $('#page-intro'),
+    loading: $('#loading-screen'),
+    // skin analyzer
+    pageResultSkin: $('#page-result'),
+    pageSkinResult: $('#face-result-skin'),
+    pageSkinScore: $('#page-skin-score'),
+    pageSkinProduct: $('#page-result-product'),
+    pageQuestionAge: $('#page-question-age'),
+    questionSkinCondition: $('#page-question-skin-condition'),
+    questionDirectSunlight: $('#page-question-direct-sunlight'),
+    questionPersonalConcern: $('#page-question-dry-concerns'),
+    questionLivein: $('#page-question-livein'),
+    // i dont know
+    questionDescribeSkin: $('#page-question-describe-skin'),
+    questionPoresSkin: $('#page-question-pores'),
+    questionAfternoon: $('#page-question-afternoon'),
+    questionBlemishes: $('#page-question-blemishes'),
+    questionMorning: $('#page-question-morning'),
+    // skin condition
+    questionNormalSkin: $('#page-question-normal-concerns'),
+    questionOilySkin: $('#page-question-oily-concerns'),
+    questionCombinationSkin: $('#page-question-combination-concerns'),
+    questionDullSkin: $('#page-question-dull-concerns'),
+    questionDrySkin: $('#page-question-dry-concerns'),
+    questionAcneSkin: $('#page-question-acne-concerns'),
+    // result
+    resultSkinType: $('#page-result-skintype')
+  }
+
+  // Tambahkan di bagian atas setelah deklarasi variabel lainnya
+// const products = {
+//   "Oval": {
+//     "Straight": [
+//       { model: '/assets/models/Model Hair/Oval/STRAIGHT/oval_straight_01 BuzzCut.glb', name: 'BUZZ CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Oval/STRAIGHT/oval_straight_02 TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Oval/STRAIGHT/oval_straight_03 TexturedQuiff.glb', name: 'TEXTURED QUIFF', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Wavy": [
+//       { model: '/assets/models/Model Hair/Oval/WAVY/oval_wavy_01 LayeredWaves.glb', name: 'LAYERED WAVES', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Oval/WAVY/oval_wavy_02 Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Oval/WAVY/oval_wavy_03 SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Curly": [
+//       { model: '/assets/models/Model Hair/Oval/CURLY/oval_curly_01 FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Oval/CURLY/oval_curly_02 SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Oval/CURLY/oval_curly_03 TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Tight Curly": [
+//       { model: '/assets/models/Model Hair/Oval/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Oval/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Oval/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ]
+//   },
+//   "Diamond": {
+//     "Straight": [
+//       { model: '/assets/models/Model Hair/Diamond/STRAIGHT/diamond_straight_01 Fringe.glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Diamond/STRAIGHT/diamond_straight_02 HighFade.glb', name: 'HIGH FADE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Diamond/STRAIGHT/diamond_straight_03 TexturedCrop.glb', name: 'TEXTURED CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Wavy": [
+//       { model: '/assets/models/Model Hair/Diamond/WAVY/diamond_wavy_01 FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Diamond/WAVY/diamond_wavy_02 SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Diamond/WAVY/diamond_wavy_03 TexturedWaves.glb', name: 'TEXTURE WAVES', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Curly": [
+//       { model: '/assets/models/Model Hair/Diamond/CURLY/diamond_curly_01 Fringe.glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Diamond/CURLY/diamond_curly_02 HighTopCurls.glb', name: 'HIGH TOP CURLS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Diamond/CURLY/diamond_curly_03 LayeredTapered.glb', name: 'LAYERED TAPERED', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Tight Curly": [
+//       { model: '/assets/models/Model Hair/Diamond/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Diamond/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Diamond/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ]
+//   },
+//   "Oblong": {
+//     "Straight": [
+//       { model: '/assets/models/Model Hair/Oblong/STRAIGHT/Straight_CrewCut.glb', name: 'CREW CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Oblong/STRAIGHT/Straight_SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Oblong/STRAIGHT/Straight_SlickBack.glb', name: 'SLICK BACK', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Wavy": [
+//       { model: '/assets/models/Model Hair/Oblong/WAVY/Wavy_CrewCut.glb', name: 'CREW CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Oblong/WAVY/Wavy_SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Oblong/WAVY/Wavy_TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Curly": [
+//       { model: '/assets/models/Model Hair/Oblong/CURLY/Curly_Fringe.glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Oblong/CURLY/Curly_LowTapper.glb', name: 'LOW TAPPER', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Oblong/CURLY/Curly_MediumCurls.glb', name: 'MEDIUM CURLS', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Tight Curly": [
+//       { model: '/assets/models/Model Hair/Oblong/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Oblong/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Oblong/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ]
+//   },
+//   "Square": {
+//     "Straight": [
+//       { model: '/assets/models/Model Hair/Rectangle/STRAIGHT/CombOver.glb', name: 'COMB OVER', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Rectangle/STRAIGHT/RectangleStraightSidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Rectangle/STRAIGHT/SlickBack.glb', name: 'SLICK BACK', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Wavy": [
+//       { model: '/assets/models/Model Hair/Rectangle/WAVY/Layered.glb', name: 'LAYERED', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Rectangle/WAVY/MediumLengthTaper.glb', name: 'MEDIUM LENGTH TAPER', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Rectangle/WAVY/SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Curly": [
+//       { model: '/assets/models/Model Hair/Rectangle/CURLY/CurlyUndercut.glb', name: 'UNDERCUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Rectangle/CURLY/Fringe.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Rectangle/CURLY/ShortTapered.glb', name: 'SHORT TAPERED', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Tight Curly": [
+//       { model: '/assets/models/Model Hair/Rectangle/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Rectangle/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Rectangle/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ]
+//   },
+//   "Round": {
+//     "Straight": [
+//       { model: '/assets/models/Model Hair/Round/STRAIGHT/Straight_Caesar.glb', name: 'CAESAR', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Round/STRAIGHT/Straight_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Round/STRAIGHT/Straight_Pompadour.glb', name: 'POMPADOUR', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Wavy": [
+//       { model: '/assets/models/Model Hair/Round/WAVY/Wavy_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Round/WAVY/Wavy_Fringe.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Round/WAVY/Wavy_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Curly": [
+//       { model: '/assets/models/Model Hair/Round/CURLY/Curly_MulletModern.glb', name: 'MULLET', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Round/CURLY/Curly_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Round/CURLY/Curly_TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Tight Curly": [
+//       { model: '/assets/models/Model Hair/Round/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Round/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Round/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ]
+//   },
+//   "Triangle": {
+//     "Straight": [
+//       { model: '/assets/models/Model Hair/Triangle/STRAIGHT/Medium-LengthSidePart.glb', name: 'SIDE PART', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Triangle/STRAIGHT/Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Triangle/STRAIGHT/SpikyCut.glb', name: 'SPIKY CUT', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Wavy": [
+//       { model: '/assets/models/Model Hair/Triangle/WAVY/FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Triangle/WAVY/MediumLengthWaves.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Triangle/WAVY/TriangleWavySidePart.glb', name: 'QUIFF', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Curly": [
+//       { model: '/assets/models/Model Hair/Triangle/CURLY/HighTopCurls.glb', name: 'HIGH TOP CURLS', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Triangle/CURLY/TaperedFade.glb', name: 'TAPERED FADE', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Triangle/CURLY/TriangleCurlySidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ],
+//     "Tight Curly": [
+//       { model: '/assets/models/Model Hair/Triangle/oval_tightcurly_1.glb', name: 'TIGHT FADE', img: './assets/images/hair-powder.png',alt: "Kahf", text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//       { model: '/assets/models/Model Hair/Triangle/oval_tightcurly_2.glb', name: 'COILS', img: './assets/images/pomade-matte.png',alt: "Kahf", text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//       { model: '/assets/models/Model Hair/Triangle/oval_tightcurly_3.glb', name: 'TWIST OUT', img: './assets/images/pomade-sleek.png',alt: "Kahf", text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+//     ]
+//   },
+// };
+
+let hairFaceModel = hairstyleFiles.Oval.Straight;
+
+// function getHairstyleModels(faceShape, hairType) {
+//   // Cek jika ada mapping untuk kombinasi face shape dan hair type
+//   if (hairstyleModelsMapping[faceShape] && hairstyleModelsMapping[faceShape][hairType]) {
+//     return hairstyleModelsMapping[faceShape][hairType];
+//   }
+  
+//   // Fallback: coba cari berdasarkan face shape saja (gunakan hair type pertama yang tersedia)
+//   if (hairstyleModelsMapping[faceShape]) {
+//     const availableHairTypes = Object.keys(hairstyleModelsMapping[faceShape]);
+//     if (availableHairTypes.length > 0) {
+//       return hairstyleModelsMapping[faceShape][availableHairTypes[0]];
+//     }
+//   }
+  
+//   // Final fallback: gunakan default models
+//   console.warn(`No specific models found for ${faceShape} - ${hairType}, using default models`);
+//   return defaultHairstyleModels;
+// }
+
+// // Fallback models jika tidak ada mapping yang cocok
+// const defaultHairstyleModels = [
+//   { model: '/assets/models/QuiffHair.glb', name: 'QUIFF', productImg: './assets/images/hair-powder.png', productText: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+//   { model: '/assets/models/LayeredHair.glb', name: 'LAYERED', productImg: './assets/images/pomade-matte.png', productText: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+//   { model: '/assets/models/slickback-tryscale.glb', name: 'SLICK BACK', productImg: './assets/images/pomade-sleek.png', productText: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+// ];
+
+  // ===== TAMBAHKAN KODE INI DI SINI =====
+  // Event listener untuk tombol hairstyle selection
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+function findProduct(faceShape, hairType, hairstyleName) {
+  const hairGroups = modelDummyHairstyle?.[faceShape];
+  if (!hairGroups) return null;
+
+  // Normalize names
+  const targetName = (hairstyleName || "").trim().toUpperCase();
+
+  // 🔑 Search across ALL hair types (Straight, Wavy, Curly)
+  for (const type in hairGroups) {
+    const hairList = hairGroups[type];
+    const match = hairList.find(
+      p => (p.name || "").trim().toUpperCase() === targetName
+    );
+    if (match) return match;
+  }
+
+  return null;
+}
+
+let faceShapeResult = "Unknown";
+$("#button-to-hairstyle1, #button-to-hairstyle2, #button-to-hairstyle3, #button-to-hairstyle4").on("click", async function () {
+  const container = $("#hairstyle-grid-inner-list");
+  container.empty();
+
+  if (!uploadedFaceBase64) {
+    console.error("⚠️ No uploaded face available!");
+    alert("Please complete face scan first");
+    return;
+  }
+
+  const buttonHairMap = {
+    "button-to-hairstyle1": "straight",
+    "button-to-hairstyle2": "wavy", 
+    "button-to-hairstyle3": "curly",
+    "button-to-hairstyle4": "tight_curly"
+  };
+
+  const buttonId = $(this).attr("id");
+  hairType = buttonHairMap[buttonId];
+  
+  console.log(`🎯 Starting hair fusion for: ${hairType}`);
+  
+  // --- Clean base64
+  let cleanFaceBase64 = uploadedFaceBase64;
+  if (uploadedFaceBase64.includes('base64,')) {
+    cleanFaceBase64 = uploadedFaceBase64.split('base64,')[1];
+  }
+  console.log(`📏 Clean base64 length: ${cleanFaceBase64.length}`);
+
+  // --- Predict face shape first
+  try {
+    const predictRes = await fetch("/api/predict-face-shape", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ image_base64: cleanFaceBase64 })
+    });
+    const predictData = await predictRes.json();
+    console.log("🔮 Face shape prediction:", predictData);
+
+    if (predictData.success && predictData.prediction?.face_shape) {
+      faceShapeResult = predictData.prediction.face_shape;
+    }
+  } catch (e) {
+    console.error("❌ Error calling /api/predict-face-shape:", e);
+  }
+
+  try {
+    container.html('<div class="loading">Loading hairstyles...</div>');
+
+    const startTime = Date.now();
+    const res = await fetch("/api/fuse-hair", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        face_base64: cleanFaceBase64,
+        hair_type: hairType
+      })
+    });
+
+    const responseTime = Date.now() - startTime;
+    console.log(`⏱️ API response received in ${responseTime}ms`);
+    console.log(`📨 Response status: ${res.status} ${res.statusText}`);
+
+    const data = await res.json();
+    console.log("📄 Full API response:", data);
+
+    if (!data.success) {
+      throw new Error(data.error || `API returned success: false`);
+    }
+
+    if (!data.hairfastgan_results?.length) {
+      container.text('No hairstyles available for this type.');
+      console.warn("⚠️ No hairstyles returned from /api/fuse-hair", data);
+      return;
+    }
+
+    container.empty();
+    console.log(`🎉 Rendering ${data.hairfastgan_results.length} hairstyles`);
+
+    // --- Render each hairstyle
+    data.hairfastgan_results.forEach((item, index) => {
+      const card = $("<div>", { 
+        class: "hairstyle-bg-card2D", 
+        css: { opacity: 0 } 
+      });
+
+      // --- API output image (2D hair fusion)
+      let imageUrl = "";
+      if (item.output_base64) {
+        imageUrl = `data:image/png;base64,${item.output_base64}`;
+      } else if (item.output_url) {
+        imageUrl = item.output_url;
+      } else {
+        imageUrl = "/assets/images/fallback-hairstyle.png";
+      }
+
+      const hairstyleImg = $("<img>", {
+        src: imageUrl,
+        alt: item.name || hairType,
+        title: item.name || hairType,
+        class: "hairstyle-item-2D"
+      });
+
+      hairstyleImg.on('error', function() {
+        console.error(`❌ Failed to load image for hairstyle ${index}: ${item.name}`);
+        $(this).attr('src', '/assets/images/fallback-hairstyle.png');
+      });
+
+      hairstyleImg.on('load', function() {
+        console.log(`✅ Successfully loaded image for hairstyle ${index}`);
+      });
+
+      faceShapeResult = item.face_shape
+      // --- Match with product data
+      // const product = modelDummyHairstyle?.[faceShapeResult]?.[capitalize(hairType)]?.[index];
+      const product = findProduct(faceShapeResult, hairType, item.name);
+
+      const styleName = $("<p>", { 
+        class: "card-2D-p", 
+        text: item.name || product?.name || hairType 
+      });
+
+      const faceShape = $("<p>", { 
+        class: "card-2D-p-vert", 
+        text: item.face_shape || faceShapeResult
+      });
+
+      // --- Append everything
+      card.append(hairstyleImg, styleName, faceShape);
+
+      // ✅ FIXED: show only product image (from `img`)
+      if (product?.img) {
+        card.append($("<img>", { class: "hairstyle-prod-2D", src: product.img }));
+      }
+
+      container.append(card);
+
+      // --- Click updates 3D (merge item + product)
+      card.on("click", () => {
+        console.log(`🎯 Updating 3D model with ${item.name}`);
+        render3DHairstyle({ ...item, ...product }, index);
+      });
+
+      setTimeout(() => {
+        card.css({ 
+          transition: "opacity 0.5s ease-in-out", 
+          opacity: 1 
+        });
+      }, 100 * index);
+    });
+
+    console.log(`✅ Successfully rendered ${data.hairfastgan_results.length} ${hairType} hairstyles`);
+
+  } catch (err) {
+    console.error("❌ Error in hair fusion:", err);
+    container.html(`
+      <div class="error-message" style="text-align: center; padding: 20px; color: #ff4444;">
+        <p>Error loading hairstyles: ${err.message}</p>
+        <button style="margin-top: 10px; padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;" 
+                onclick="location.reload()">
+          Retry
+        </button>
+      </div>
+    `);
+  }
+});
+
+  var sec = 0;
+  var secc;
+  const checkbox = document.getElementById("privacy");
+  const button = document.getElementById("take-selfie-hair");
+  const questionItems = document.querySelectorAll(".question-list");
+  const nextBtn = document.getElementById("submit-btn");
+
+  let selectedItem = null; // item yang dipilih
+
+  questionItems.forEach(item => {
+    item.addEventListener("click", () => {
+      // reset semua item
+      questionItems.forEach(el => el.classList.remove("active"));
+
+      // aktifkan item yang diklik
+      item.classList.add("active");
+      selectedHairType = item.getAttribute('data-value');
+      userData.hair_type = selectedHairType;
+      console.log("✅ DEBUG: Hair type selected:", userData.hair_type);
+
+      // aktifkan tombol Next
+      nextBtn.classList.remove("disabled");
+    });
+  });
+
+  nextBtn.addEventListener("click", async () => {
+    console.log("🔍 DEBUG: Checking userData before validation:", {
+    name: userData.name,
+    phone: userData.phone,
+    age: userData.age,
+    hair_type: userData.hair_type,
+    face_base64: userData.face_base64 ? `exists (length: ${userData.face_base64.length})` : 'MISSING'
+  });
+
+  if (!selectedHairType) {
+    alert("Please select a hair type first");
+    return;
+  }
+
+  // Validasi data lengkap
+  const missingFields = [];
+  if (!userData.name) missingFields.push('name');
+  if (!userData.face_base64) missingFields.push('face_base64');
+  if (!userData.hair_type) missingFields.push('hair_type');
+
+  if (missingFields.length > 0) {
+    console.log("❌ DEBUG: Missing fields:", missingFields);
+    console.log("❌ DEBUG: Current userData:", userData);
+    alert(`Missing data: ${missingFields.join(', ')}. Please complete all steps.`);
+    return;
+  }
+
+  showScreen('loading');
+  
+  // SET INTERVAL UNTUK LOADING
+  sec = 0; // reset dulu
+  secc = setInterval(() => {
+    sec++;
+    console.log("⏱️ Loading seconds:", sec);
+    
+    // Optional: Update loading progress di UI
+    const progressElement = document.getElementById("loading-progress");
+    if (progressElement) {
+      progressElement.textContent = `Loading... ${sec}s`;
+    }
+  }, 1000);
+  
+  try {
+    // Kirim data lengkap ke database
+    const payload = {
+      name: userData.name,
+      phone: userData.phone,
+      age: userData.age,
+      hair_type: userData.hair_type,
+      face_base64: userData.face_base64
+    };
+
+    console.log("🔄 Starting database save process...");
+    console.log("📦 Payload data:", {
+      name: payload.name,
+      phone: payload.phone,
+      age: payload.age,
+      hair_type: payload.hair_type,
+      face_base64_length: payload.face_base64?.length
+    });
+
+    // TAMBAHKAN CONSOLE LOG DI SINI
+    console.log("🔄 Starting database save process...");
+    console.log("📦 Payload data:", payload);
+    console.log("🌐 Sending POST request to /api/save-complete-user");
+
+    const startTime = Date.now();
+    const res = await fetch("/api/save-complete-user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const endTime = Date.now();
+    console.log(`⏱️ Request completed in ${endTime - startTime}ms`);
+    console.log("📨 Response status:", res.status);
+
+    const data = await res.json();
+    
+    if (data.success) {
+      console.log("✅ Complete user data saved successfully:", data);
+      console.log("🎯 Database save completed, proceeding to next step");
+      
+      // Lanjutkan ke proses berikutnya (3D scene, dll)
+      if (data_global_texture) {
+        console.log("🎬 Starting 3D scene with face shape:", window.faceShapePrediction);
+        initThreeScene();
+      } else {
+        // Jika texture belum ready, tunggu sebentar
+        setTimeout(() => {
+          if (data_global_texture) {
+            initThreeScene();
+            console.log("hihaaa");
+          }
+          else {
+            console.log(data)
+          }
+        }, 2000);
+      }
+      
+    } else {
+      console.error("❌ Failed to save complete user data:", data);
+      console.error("💥 Database save failed with message:", data.message || "Unknown error");
+      if (secc) clearInterval(secc);
+      alert("Failed to save data. Please try again.");
+      showScreen('pageQuestionHair'); // Kembali ke hair selection
+    }
+    
+  } catch (err) {
+    console.error("❌ Error sending complete user data:", err);
+    console.error("💥 Network error during database save:", err.message);
+    if (secc) clearInterval(secc);
+    alert("Error saving data. Please try again.");
+    showScreen('pageQuestionHair'); // Kembali ke hair selection
+  }
+});
+
+  let registeredName = ""; // variabel global
+
+function resizeTextHybrid(element, maxFont = 40, minFont = 14, minLen = 6, maxLen = 30) {
+  const textLength = element.textContent.trim().length;
+
+  // Override untuk layar kecil
+  if (window.innerWidth <= 480) {
+    maxFont = 28; 
+    minFont = 9.5;
+  }
+
+  let newFont;
+  if (textLength <= minLen) {
+    newFont = maxFont;
+  } else if (textLength >= maxLen) {
+    newFont = minFont;
+  } else {
+    const scale = (maxFont - minFont) / (maxLen - minLen);
+    newFont = Math.round(maxFont - (textLength - minLen) * scale);
+  }
+
+  element.style.fontSize = newFont + "px";
+}
+
+document.getElementById("regist-submit-btn").addEventListener("click", function() {
+  const name = document.getElementById("name").value.trim();
+  const greeting = document.querySelector(".greeting");
+  const greeting2 = document.querySelector(".greeting-2");
+  const titleName = document.querySelector(".title-name");
+
+  if (name) {
+    registeredName = name.toUpperCase();
+    greeting.textContent = `HAI ${registeredName}`;
+    greeting2.textContent = `HAI ${registeredName}`;
+    titleName.innerHTML = `NAME : <span class="bold-name">${registeredName}</span>`;
+
+    // resize sesuai panjang teks
+    resizeTextHybrid(greeting2);
+  } else {
+    greeting.textContent = "HAI";
+    greeting2.textContent = "HAI";
+    titleName.innerHTML = 'NAME : <span class="bold-name"></span>';
+    registeredName = "";
+
+    resizeTextHybrid(greeting2);
+  }
+});
+
+
+// biar responsif saat window resize
+window.addEventListener("resize", () => {
+  document.querySelectorAll(".greeting-2").forEach(el => resizeTextHybrid(el));
+});
+
+
+  document.getElementById("download-result").addEventListener("click", function () {
+  const section = document.getElementById("product-hair-screen");
+  const userName = document.querySelector(".title-name").textContent.trim();
+  const safeName = userName ? userName.replace(/\s+/g, "_") : "user";
+  const fileName = `hairstyle_result_${safeName}.png`;
+
+  const canvasIds = ["renderCanvas2", "renderCanvas3", "renderCanvas4"];
+  const tempImgs = [];
+
+  canvasIds.forEach(id => {
+    const canvas = document.getElementById(id);
+    if (canvas) {
+      const img = new Image();
+      img.src = canvas.toDataURL("image/png");
+
+      img.style.position = "absolute";
+      img.style.top = canvas.offsetTop + "px";
+      img.style.left = canvas.offsetLeft + "px";
+      img.style.width = canvas.offsetWidth + "px";
+      img.style.height = canvas.offsetHeight + "px";
+
+      img.id = "temp-" + id;
+      section.appendChild(img);
+      tempImgs.push(img);
+    }
+  });
+
+  const skipIds = ["download-result", "finish-page-hair-product", "icon-back-white"];
+
+  domtoimage.toBlob(section, {
+    filter: function(node) {
+      return !skipIds.includes(node.id);
+    }
+  })
+  .then(function (blob) {
+    tempImgs.forEach(img => section.removeChild(img));
+
+    const link = document.createElement("a");
+    link.download = fileName;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+  })
+  .catch(function (error) {
+    console.error("Download gagal:", error);
+    tempImgs.forEach(img => section.removeChild(img));
+  });
+});
+
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
+const ageInput = document.getElementById("age");
+const requiredCheckbox = document.getElementById("privacy-required");
+const submitBtn = document.getElementById("regist-submit-btn");
+let userData = JSON.parse(localStorage.getItem('userData')) || {
+  name: null,
+  phone: null,
+  age: null,
+  face_base64: null,
+  hair_type: null
+};
+function updateUserData(key, value) {
+  userData[key] = value;
+  localStorage.setItem('userData', JSON.stringify(userData));
+  console.log(`✅ DEBUG: userData.${key} updated:`, value);
+}
+let selectedHairType = null; // untuk simpan pilihan hair type global
+let latestFaceBase64 = null; // untuk simpan photo base64
+
+// regex validasi nomor HP (harus mulai 0, panjang 9–13 digit)
+const regexPhone = (phone) => {
+  return /^0[1-9][0-9]{7,11}$/.test(phone);
+};
+
+// batasi input phone max 15 digit
+phoneInput.addEventListener("input", () => {
+  phoneInput.value = phoneInput.value.replace(/\D/g, ""); // hanya angka
+  if (phoneInput.value.length > 13) {
+    phoneInput.value = phoneInput.value.slice(0, 13);
+  }
+});
+
+// batasi input age max 2 digit
+ageInput.addEventListener("input", () => {
+  ageInput.value = ageInput.value.replace(/\D/g, ""); // hanya angka
+  if (ageInput.value.length > 2) {
+    ageInput.value = ageInput.value.slice(0, 2);
+  }
+});
+
+// fungsi cek validasi
+function validateForm() {
+  const nameFilled = nameInput.value.trim() !== "";
+  const phoneFilled = regexPhone(phoneInput.value.trim()); 
+  const ageFilled = ageInput.value.trim() !== "";
+  const checkboxChecked = requiredCheckbox.checked;
+  const hairFilled = selectedHairType !== null; // pastikan hair type dipilih
+  const photoFilled = latestFaceBase64 !== null; // pastikan ada foto
+  
+  // if (nameFilled && phoneFilled && ageFilled && checkboxChecked && hairFilled && photoFilled)
+  if (nameFilled && phoneFilled && ageFilled && checkboxChecked) {
+    submitBtn.disabled = false;
+    submitBtn.classList.remove("disabled");
+    phoneInput.classList.remove("error");
+    ageInput.classList.remove("error");
+  } else {
+    submitBtn.disabled = true;
+    submitBtn.classList.add("disabled");
+
+    if (!phoneFilled && phoneInput.value.trim() !== "") {
+      phoneInput.classList.add("error");
+    } else {
+      phoneInput.classList.remove("error");
+    }
+
+    if (ageInput.value.length > 2) {
+      ageInput.classList.add("error");
+    } else {
+      ageInput.classList.remove("error");
+    }
+  }
+}
+
+[nameInput, phoneInput, ageInput, requiredCheckbox].forEach(el => {
+  el.addEventListener("input", validateForm);
+});
+
+submitBtn.addEventListener("click", async () => {
+  if (submitBtn.disabled) {
+    if (!nameInput.value.trim()) nameInput.classList.add("error");
+    if (!regexPhone(phoneInput.value.trim())) phoneInput.classList.add("error");
+    if (!ageInput.value.trim() || ageInput.value.length > 2) ageInput.classList.add("error");
+  }
+  userData.name = document.getElementById("name").value.trim();
+  userData.phone = document.getElementById("phone").value.trim();
+  userData.age = parseInt(document.getElementById("age").value.trim(), 10);
+
+  console.log("✅ DEBUG: Form data saved to userData:", userData);
+});
+
+// kondisi awal
+validateForm();
+
+const requiredCheckbox2 = document.getElementById("privacy2-required");
+  const agreeBtn = document.getElementById("agree-instruction-btn");
+
+  function validateCheckbox2() {
+    if (requiredCheckbox2.checked) {
+      agreeBtn.disabled = false;
+      agreeBtn.classList.remove("disabled");
+    } else {
+      agreeBtn.disabled = true;
+      agreeBtn.classList.add("disabled");
+    }
+  }
+
+  // jalankan saat checkbox berubah
+  requiredCheckbox2.addEventListener("change", validateCheckbox2);
+
+  // kondisi awal
+  validateCheckbox2();
+
+  const originalShowScreen = showScreen;
+showScreen = function(screenName) {
+  originalShowScreen(screenName);
+  
+  // Jika kembali ke question hair, pastikan hair type terpilih tetap aktif
+  if (screenName === 'pageQuestionHair' && selectedHairType) {
+    const selectedItem = document.querySelector(`[data-value="${selectedHairType}"]`);
+    if (selectedItem) {
+      questionItems.forEach(el => el.classList.remove("active"));
+      selectedItem.classList.add("active");
+      nextBtn.classList.remove("disabled");
+    }
+  }
+};
+
+  // --- Face capture variables ---
+  let currentAngle = 0;
+  let targetAngle = 0;
+  let texturePath = '';
+  let capturedImages = [];
+  
+document.addEventListener('DOMContentLoaded', function () {
+  const hairTypeOptions = document.querySelectorAll('.question-list');
+  const resultCard = document.querySelector('.result-card');
+  const hairTypeDetail = document.querySelector('.hair-type-detail');
+  const resultImg = document.querySelector('.result-hair-type'); // pastikan ada <img class="result-img">
+
+  // mapping data-value ke gambar
+  const hairTypeImages = {
+    "Straight": "./assets/images/Straight-1.png",
+    "Wavy": "./assets/images/Wavy-1.png",
+    "Curly": "./assets/images/Curly-1.png",
+    "Tight Curly": "./assets/images/Tight Curly-1.png"
+  };
+
+  hairTypeOptions.forEach(option => {
+    option.addEventListener('click', function () {
+      // reset selected
+      hairTypeOptions.forEach(opt => opt.classList.remove('selected'));
+      this.classList.add('selected');
+
+      // ambil value
+      const selectedHairType = this.getAttribute('data-value');
+
+      // isi teks dan gambar sesuai mapping
+      hairTypeDetail.textContent = selectedHairType;
+      resultImg.setAttribute('src', hairTypeImages[selectedHairType]);
+      resultImg.setAttribute('alt', selectedHairType);
+
+      // tampilkan result-card
+      resultCard.style.display = 'block';
+
+      console.log('User memilih:', selectedHairType);
+    });
+  });
+});
+  
+  let qrCode = null;
+  let qrResult = null;
+  
+  // --- QR Result ---
+//   function generateResultQR() {
+//     if (!qrResult) {
+//       qrResult = new QRCode("qr_image_modal", {
+//       text: "https://www.kahfeveryday.com/",
+//       width: 256,
+//       height: 256,
+//       colorDark: "#3f4939",
+//       colorLight: "#ffffff",
+//       correctLevel: QRCode.CorrectLevel.H,
+//     });
+//   } else {
+//     qrResult.clear(); 
+//     qrResult.makeCode("https://www.kahfeveryday.com/");
+//   }
+    
+    
+//   console.log("QR Code generated for result.");
+//   document.getElementById("qrModal").style.display = "flex";
+// }
+
+// Event listener untuk tombol share
+    // document.getElementById("share-result").addEventListener("click", function() {
+    //   generateResultQR();
+    // });
+    
+    // // Event listener untuk menutup modal
+    // $(".close").on("click", function() {
+    //   $("#qrModal").fadeOut();
+    // });
+    
+    // // Tutup modal jika diklik di luar area konten
+    // window.addEventListener("click", function(event) {
+    //   const modal = document.getElementById("qrModal");
+    //   if (event.target === modal) {
+    //     modal.style.display = "none";
+    //   }
+    // });
+
+  function showScreen(screenName) {
+    // Hide all screens
+    Object.values(screens).forEach(screen => {
+      $(screen).addClass('hidden'); // wrap with $()
+    });
+
+    // Show the requested screen
+    $(screens[screenName]).removeClass('hidden'); // wrap with $()
+  }
+
+
+const faceShape = [
+  {
+    name: "Oval",
+    image: "/assets/images/oval.png",
+    description:
+      "The most balanced and versatile face shape, with a slightly wider forehead than jawline. Almost any hairstyle works well, from short, sharp crops to longer, layered looks, giving you the freedom to experiment.",
+  },
+  {
+    name: "Round",
+    image: "/assets/images/round.png",
+    description:
+      "Characterized by equal width and length with soft jawlines. Hairstyles that add height and volume on top help elongate the face, while keeping the sides shorter for a sharper, more defined appearance.",
+  },
+  {
+    name: "Square",
+    image: "/assets/images/square.png",
+    description:
+      "Defined by a strong, angular jawline and balanced proportions. Textured or layered cuts help soften sharp angles, adding movement and balance without losing the masculine edge.",
+  },
+  {
+    name: "Rectangle",
+    image: "/assets/images/oblong.png",
+    description:
+      "Longer than it is wide, with a straight jawline. Styles with added volume on the sides help balance the length, while avoiding excessive height on top to keep proportions in check.",
+  },
+  {
+    name: "Oblong",
+    image: "/assets/images/oblong.png",
+    description:
+      "Longer than it is wide, with a straight jawline. Styles with added volume on the sides help balance the length, while avoiding excessive height on top to keep proportions in check.",
+  },
+  {
+    name: "Heart",
+    image: "/assets/images/heart.png",
+    description:
+      "A broad forehead that tapers to a narrow, pointed chin. Hairstyles that add fullness and texture around the jawline create harmony and draw attention to the eyes and cheekbones.",
+  },
+  {
+    name: "Diamond",
+    image: "/assets/images/diamond.png",
+    description:
+      "Wide cheekbones with a narrow forehead and chin. Best paired with styles that bring volume or bangs to the forehead, balancing the width and adding softness to the overall look.",
+  },
+  {
+    name: "Triangle",
+    image: "/assets/images/triangular.png",
+    description:
+      "A wider jawline compared to the forehead. Opt for hairstyles with volume and fullness at the crown to balance proportions and add height, creating a more even silhouette.",
+  },
+];
+
+// ambil elemen produk
+const prodImg = document.getElementById("prod-img");
+const prodText = document.getElementById("prod-text");
+
+// event listener untuk setiap model-img
+function updateProduct(index) {
+  // cek face shape & hair type udah ada
+  if (!faceShapeResult || !hairType) return;
+
+  // ambil list produk sesuai face shape + hair type
+  const productList = hairstyleFiles[faceShapeResult]?.[hairType];
+  if (!productList || productList.length === 0) return;
+
+  // supaya loop kayak carousel
+  const safeIndex = (index + productList.length) % productList.length;
+  const product = productList[safeIndex];
+
+  if (!product) return;
+
+  // update UI
+  prodImg.src = product.img;
+  prodImg.alt = product.alt;
+  prodText.innerHTML = product.text;
+  $(".hairstyle-name-2").html(product.name);
+  $(".hair-name").html(product.name);
+  if (viewer) {
+    viewer.setAttribute("src", product.model);
+  }
+}
+
+
+// // kasih event listener ke setiap card
+const track = $(".carousel-track");
+let items = $(".model-img-wrapper");
+const total = items.length;
+const itemWidth = items.outerWidth(true)+50;
+
+let currentIndex = 1; // mulai dari 0
+
+// fungsi update posisi carousel
+function updateCarousel(index) {
+  currentIndex = (index + total) % total; // biar loop infinite
+  let activeItem = $('.model-img-wrapper.active')
+  let nameHair = activeItem.attr('data-hair-name');
+  let imgProdHair = activeItem.attr('data-prod-img');
+  let textProdHair = activeItem.attr('data-prod-text');
+
+  const offset = -((currentIndex - 1) * itemWidth); 
+  track.css("transition", "transform 0.5s ease");
+  track.css("transform", `translateX(${offset}px)`);
+
+  $('.hair-name').html(nameHair);
+  $('#prod-img').attr('src', imgProdHair);
+  $('#prod-text').html(textProdHair);
+
+
+
+  setActive();
+  updateProduct(currentIndex);
+}
+
+// fungsi set active (yang ditengah)
+function setActive() {
+  items.removeClass("active");
+
+  // cari index tengah (selalu currentIndex)
+  items.eq(currentIndex).addClass("active");
+}
+
+// tombol
+$(".changeLeft").on("click", () => updateCarousel(currentIndex - 1));
+$(".changeRight").on("click", () => updateCarousel(currentIndex + 1));
+
+items.on("click", function () {
+  const index = $(this).index(); // ambil posisi item
+  updateCarousel(index);
+});
+
+// init
+updateCarousel(currentIndex);
+
+
+
+function updateFaceShapeUI(prediction) {
+    const result = faceShape.find(
+      item => item.name.toLowerCase() === prediction.toLowerCase()
+    );
+
+    if (result) {
+      document.getElementById("face-type").textContent = result.name;
+      document.getElementById("face-shape-img").src = result.image;
+      document.getElementById("face-shape-img").alt = result.name;
+      document.querySelector("#face-desc p").textContent = result.description;
+    } else {
+      document.getElementById("face-type").textContent = "Unknown";
+      document.getElementById("face-shape-img").src = "";
+      document.querySelector("#face-desc p").textContent = "No description available.";
+    }
+  }
+
+  // 🔹 Misalnya ini callback dari model prediksi
+  function onScanComplete(predictedResult) {
+    // predictedResult misalnya: "Oval", "Round", "Square", dll
+    updateFaceShapeUI(predictedResult);
+  }
+
+function renderAllHairstyles(hairResults) {
+  const grid = document.getElementById("hairstyle-grid-inner-list");
+  // if (!grid) return console.error("Could not find hairstyle-grid-inner-list element");
+  console.log("Inside Rendering All Hair Style")
+  // Remove loading indicator
+  const loading = grid.querySelector(".loading-indicator");
+  if (loading) loading.remove();
+
+  grid.innerHTML = ""; // Clear previous content
+
+  console.log("Inside Rendering All Hair Style Each 2")
+  hairResults.forEach((item, index) => {
+    // Outer card div
+    const card = document.createElement("div");
+    card.classList.add("hairstyle-bg-card2D");
+    card.style.opacity = "0"; // fade-in effect
+
+    // Hairstyle image
+    const hairstyleImg = document.createElement("img");
+    hairstyleImg.src = item.output_url;
+    hairstyleImg.alt = item.name || `Hairstyle ${index + 1}`;
+    hairstyleImg.title = item.name || `Hairstyle ${index + 1}`;
+    hairstyleImg.classList.add("hairstyle-item");
+
+    // Style name
+    const styleName = document.createElement("p");
+    styleName.classList.add("card-2D-p");
+    styleName.textContent = item.name || `Hairstyle ${index + 1}`;
+
+    // Face shape
+    const faceShape = document.createElement("p");
+    faceShape.classList.add("card-2D-p-vert");
+    faceShape.textContent = window.faceShapePrediction
+
+    // Product image
+    const prodImg = document.createElement("img");
+    prodImg.src = "./assets/images/hair-powder.png";
+    prodImg.classList.add("hairstyle-prod-2D");
+
+    // Append all elements to card
+    card.appendChild(hairstyleImg);
+    card.appendChild(styleName);
+    card.appendChild(faceShape);
+    card.appendChild(prodImg);
+
+    // Append card to grid
+    grid.appendChild(card);
+
+    console.log(card)
+
+    // Fade-in effect
+    setTimeout(() => {
+      card.style.transition = "opacity 0.5s";
+      card.style.opacity = "1";
+    }, 50 * index);
+  });
+
+  console.log(`All ${hairResults.length} hairstyles rendered.`);
+}
+
+
+function renderFirstThreeImages(hairstyleData) {
+  const gridInnerList = document.getElementById('first-three-grid-inner-list'); // separate container
+  if (!gridInnerList) return console.error("Could not find first-three-grid-inner-list element");
+
+  // Clear grid
+  gridInnerList.innerHTML = '';
+
+  hairstyleData.forEach((item, index) => {
+    const hairstyleItem = document.createElement('div');
+    hairstyleItem.className = 'hairstyle-item';
+    hairstyleItem.setAttribute('data-model-index', index);
+    hairstyleItem.setAttribute('data-name', item.name || 'Hairstyle');
+
+    const recommendedTag = item.recommended
+      ? `<span class="tag-recommended"><label>RECOMMENDED</label></span>` : '';
+
+    hairstyleItem.innerHTML = `
+      <div class="hairstyle-img">
+        <img src="data:image/png;base64,${item.output_base64}" alt="${item.name || 'Hairstyle'}" />
+        ${recommendedTag}
+      </div>
+      <div class="hairstyle-name">${item.name || 'Hairstyle'}</div>
+    `;
+
+    gridInnerList.appendChild(hairstyleItem);
+  });
+
+  console.log(`Rendered ${hairstyleData.length} first-three hairstyle items`);
+}
+
+data_global_texture = null;
+remaining_gallery = null;
+centerBase64 = null;
+currentBatchIndex = 0;
+uploadedFaceBase64 = null;
+face_url = null;
+
+async function completeScan() {
+  console.log("Completing scan process...");
+  try {
+    // 🟢 Update UI to reflect scan completion
+    console.log("Scan complete. Updating UI...");
+    $('#scan-progress').css('width', '100%');
+    $('#scan-helper-text').text('Scanning Complete...');
+
+    // 🟢 Langsung kasih feedback analyzing (tanpa nunggu fetch selesai)
+    setTimeout(() => {
+      $('#scan-helper-text').text('Analyzing...');
+    }, 500); // kasih delay dikit biar transisinya natural
+
+    // 🟢 Prepare result screen
+    const photoContainer = document.querySelector("#captured-photo");
+    if (photoContainer) photoContainer.innerHTML = "";
+
+    // 🟢 Proceed only if images haven't been logged and are available
+    console.log("Captured count: 1");
+    console.log("Captured Images Array:", capturedImages);
+    if (capturedImages.length > 0) {
+      const straightImage = capturedImages.find(img => img.orientation === "straight");
+      if (straightImage) {
+        latestFaceBase64 = straightImage.dataUrl;
+        userData.face_base64 = straightImage.dataUrl.split(",")[1];
+
+        console.log("✅ DEBUG: Face scan saved to userData.face_base64, length:", userData.face_base64.length);
+      }
+      const leftImage = capturedImages.find(img => img.orientation === "left");
+      const rightImage = capturedImages.find(img => img.orientation === "right");
+
+      $('#your-photo').attr('src', straightImage.dataUrl);
+      if (straightImage) $('<img>').addClass('straight-face').attr('src', straightImage.dataUrl).appendTo('#captured-photo');
+      if (leftImage) $('<img>').addClass('left-face').attr('src', leftImage.dataUrl).appendTo('#captured-photo');
+      if (rightImage) $('<img>').addClass('right-face').attr('src', rightImage.dataUrl).appendTo('#captured-photo');
+
+      const straightFaceSrc = straightImage?.dataUrl?.split(",")[1];
+      const leftFaceSrc = leftImage?.dataUrl?.split(",")[1];
+      const rightFaceSrc = rightImage?.dataUrl?.split(",")[1];
+      uploadedFaceBase64 = straightFaceSrc;
+
+      console.log("Captured Images:", {
+        straight: !!straightFaceSrc,
+        left: !!leftFaceSrc,
+        right: !!rightFaceSrc
+      });
+      hair_type = "straight"
+      if (straightFaceSrc && leftFaceSrc && rightFaceSrc) {
+        console.log("Uploading images to backend...");
+        showScreen('pageQuestionHair');
+        fetch("/api/upload-face", { // ✅ remove trailing slash
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            center: straightFaceSrc,
+            left: leftFaceSrc,
+            right: rightFaceSrc,
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          // ✅ Use backend-provided texture URL (supports HTTPS)
+          if (data.overlay_base64_raw) {
+            console.log("Creating frontend Image from base64...");
+
+            // Create a new Image object
+            let textureImg = '';
+            textureImg = new Image();
+
+            // Set its src to the base64 string
+            textureImg.src = "data:image/png;base64," + data.overlay_base64_raw;
+            centerBase64 = data.overlay_base64_raw;
+            data_global_texture = "data:image/png;base64," + data.final_uv_overlay;
+            remaining_gallery = data.remaining_gallery_base64;
+            face_url = data.face_url;
+            // remaining_gallery.forEach((imgBase64, index) => {
+            //     console.log(`Image ${index + 1}:`, imgBase64);
+            // });
+
+            // Optional: styling for preview
+            Object.assign(textureImg.style, {
+              maxWidth: "300px",
+              border: "2px solid #333",
+              display: "block",
+              marginTop: "10px"
+            });
+
+            // Append to DOM for debug/preview
+            document.querySelector("#captured-photo").appendChild(textureImg);
+
+            // Now you can use this Image object for your 3D texture
+            texturePath = textureImg;
+            console.log("Texture Image object created:", textureImg);
+          } else {
+            console.warn("texture_base64 is missing from API response");
+          }
+
+          console.log("Texture path set to:", texturePath);
+          console.log("API response received:", data);
+
+          let faceShapeData = data.predictions.center.class;
+          let faceShapeName = faceShapeData.charAt(0).toUpperCase() + faceShapeData.slice(1).toLowerCase();
+          
+
+          if (data.hairfastgan_results && data.hairfastgan_results.length > 0) {
+            lazyNine = data.face_base64;
+            uploadedFaceBase64 = data.face_base64;
+
+            renderAllHairstyles(data.hairfastgan_results);
+            //renderHairstyleItems(data.hairfastgan_results, lazyNine);
+            // renderFirstThreeImages(data.hairfastgan_results);
+            console.log("Hairstyle data rendered:", data.hairfastgan_results);
+          } else {
+            console.warn("No hairstyle data in API response");
+          }
+
+          if (data.predictions?.center?.class) {
+            const predictedFaceShape = data.predictions.center.class;
+            window.faceShapePrediction = predictedFaceShape;
+            userData.face_shape = predictedFaceShape;
+            
+            // Simpan juga di localStorage untuk persistensi
+            localStorage.setItem('faceShapePrediction', predictedFaceShape);
+            
+            console.log("✅ Face shape prediction saved:", predictedFaceShape);
+            
+            // Update UI dengan prediksi
+            updateFaceShapeUI(predictedFaceShape);
+          } else {
+            console.error("❌❌❌ NO FACE SHAPE PREDICTION FOUND IN API RESPONSE");
+            console.log("Full API response:", data);
+          }
+
+          console.log("Face shape UI updated.");
+          initThreeScene();
+          console.log("Three.js scene initialized.");
+          console.log("Predictions:", data.predictions);
+          console.log("Result image saved at:", data.saved_path);
+
+          // ✅ Display predictions
+          const predictionsDiv = document.createElement("div");
+          predictionsDiv.innerHTML = `
+            <h3>Face Shape Predictions</h3>
+            <p><strong>Center:</strong> ${data.predictions?.center?.class || "-"} (${data.predictions?.center?.confidence || "-"})</p>
+            <p><strong>Left:</strong> ${data.predictions?.left?.class || "-"} (${data.predictions?.left?.confidence || "-"})</p>
+            <p><strong>Right:</strong> ${data.predictions?.right?.class || "-"} (${data.predictions?.right?.confidence || "-"})</p>
+          `;
+          document.querySelector("#captured-photo").appendChild(predictionsDiv);
+
+          // ✅ Display result image
+          const resultImg = document.createElement("img");
+          resultImg.src = "data:image/png;base64," + data.overlay_base64_raw;
+          resultImg.style.maxWidth = "300px";
+          resultImg.style.border = "2px solid #333";
+          resultImg.style.display = "block";
+          resultImg.style.marginTop = "10px";
+          document.querySelector("#captured-photo").appendChild(resultImg);
+          console.log("Displaying result image from API response");
+          if (data.overlay_base64_raw) {
+            console.log("Displaying overlay image from API response");
+            console.log("Overlay base64 length:", data.overlay_base64_raw?.length);
+            const resultImg = document.createElement("img");
+            resultImg.src = "data:image/png;base64," + data.overlay_base64_raw;
+            Object.assign(resultImg.style, {
+              maxWidth: "300px",
+              border: "2px solid #333",
+              display: "block",
+              marginTop: "10px"
+            });
+            // console.log("%c ", "font-size:200px; background:url(" + resultImg.src + ") no-repeat; background-size:contain;");
+            document.querySelector("#captured-photo").appendChild(resultImg);
+          } else {
+            console.warn("overlay_base64_raw is missing from API response");
+          }
+
+          // Tampilkan analyzing
+          $('#scan-helper-text').text('Recomendation Ready!');
+          // Tunggu 1 detik sebelum pindah screen
+          // setTimeout(() => {
+            // showScreen('pageQuestionHair');
+          // }, 1000);
+        })
+        .catch(err => {
+          console.error("Upload error:", err);
+          // Tampilkan pesan error
+          $('#scan-helper-text').text('Error. Please try again.');
+          // Dalam 3 detik, kembali ke scan screen
+          setTimeout(() => {
+            // Reset state scan
+            startCapture = false;
+            lookedRight = false;
+            lookedLeft = false;
+            lookedStraight = false;
+            currentStepIndex = 0;
+            capturedImages = [];
+            if (typeof scanSteps !== "undefined" && scanSteps[currentStepIndex]) {
+              $('#scan-helper-text').text(scanSteps[currentStepIndex].text);
+            } else {
+              $('#scan-helper-text').text("Start Scan");
+            }
+            $('#scan-progress').css('width', '0%');
+            $('#scan-btn').css('pointer-events', 'all').html('Start Scan');
+            // showScreen('scanHair');
+          }, 3000);
+        });
+
+      } else {
+        const warningMsg = document.createElement("div");
+        warningMsg.textContent = "Could not capture all required angles. Please try again.";
+        Object.assign(warningMsg.style, {
+          color: "#ff8800",
+          textAlign: "center",
+          margin: "20px 0"
+        });
+        photoContainer.appendChild(warningMsg);
+      }
+
+    } else {
+      console.log("Images already processed previously.");
+    }
+
+  } catch (err) {
+    console.error("Error in completeScan():", err);
+    alert("An unexpected error occurred during scan completion");
+
+    const fallback = document.createElement("div");
+    fallback.textContent = "Unexpected error. Please try again.";
+    Object.assign(fallback.style, {
+      color: "#ff4444",
+      textAlign: "center",
+      margin: "20px 0"
+    });
+    document.querySelector("#captured-photo").appendChild(fallback);
+  }
+}
+
+// Event listener untuk item hairstyle
+document.addEventListener("DOMContentLoaded", function() {
+  // Gunakan event delegation untuk menangani klik pada hairstyle-item
+  document.addEventListener("click", function(e) {
+    const hairstyleItem = e.target.closest(".hairstyle-item");
+    if (hairstyleItem) {
+      // Ambil nama hairstyle dari elemen .hairstyle-name
+      const hairStyleNameElement = hairstyleItem.querySelector(".hairstyle-name");
+      if (hairStyleNameElement) {
+        selectedHairStyleName = hairStyleNameElement.textContent;
+        // Update teks di sidebar
+        // updateSidebarHairStyle();
+        
+        // Hapus class active dari semua item
+        document.querySelectorAll(".hairstyle-item").forEach(item => {
+          item.classList.remove("active");
+        });
+        
+        // Tambahkan class active ke item yang dipilih
+        hairstyleItem.classList.add("active");
+      }
+    }
+  });
+
+  // Inisialisasi sidebar dengan nilai default
+  // updateSidebarHairStyle();
+});
+
+let faceShapePrediction =
+    window.faceShapePrediction ||
+    userData?.face_shape ||
+    localStorage.getItem('faceShapePrediction') ||
+    "Oval";
+
+function initThreeScene() {
+  // ---- Shared loader ----
+  const loader = new THREE.GLTFLoader();
+  const textureLoader = new THREE.TextureLoader();
+  const texturePath = data_global_texture;
+  const texture = textureLoader.load(texturePath, () => {
+    texture.flipY = false;
+    texture.encoding = THREE.sRGBEncoding;
+    texture.offset.y += 0.008;
+  });
+
+  let modelGroup; // main face group
+  let allGroups = []; // all groups across canvases
+
+  console.log("🔍 DEBUG - Checking face shape prediction sources:");
+  console.log("window.faceShapePrediction:", window.faceShapePrediction);
+  console.log("userData.face_shape:", userData.face_shape);
+  console.log("localStorage faceShapePrediction:", localStorage.getItem('faceShapePrediction'));
+
+  // Capitalize first letter
+  faceShapePrediction = faceShapePrediction.charAt(0).toUpperCase() + faceShapePrediction.slice(1).toLowerCase();
+  console.log("🔍 FINAL faceShapePrediction:", faceShapePrediction);
+
+  // ---- Map face shapes to model files ----
+  // const faceShapeToFaceModels = {
+  //   "Oval": '/assets/models/3D_KAHF_HeadNeck_Oval.glb',
+  //   "Round": '/assets/models/3D_KAHF_HeadNeck_Round.glb',
+  //   "Square": '/assets/models/3D_KAHF_HeadNeck_Square.glb',
+  //   "Oblong": '/assets/models/3D_KAHF_HeadNeck_Oblong.glb',
+  //   "Diamond": '/assets/models/3D_KAHF_HeadNeck_Diamond.glb',
+  //   "Triangle": '/assets/models/3D_KAHF_HeadNeck_Tringular.glb'
+  // };
+  // const faceShapeToFaceModels = {
+  //   "Oval": '/assets/models/GeneralShape-Simetris.glb',
+  //   "Round": '/assets/models/GeneralShape-Simetris.glb',
+  //   "Square": '/assets/models/GeneralShape-Simetris.glb',
+  //   "Oblong": '/assets/models/GeneralShape-Simetris.glb',
+  //   "Diamond": '/assets/models/GeneralShape-Simetris.glb',
+  //   "Triangle": '/assets/models/GeneralShape-Simetris.glb'
+  // };
+  const faceShapeToFaceModels = {
+    "Oval": '/assets/models/GeneralShape_Hidung.glb',
+    "Round": '/assets/models/GeneralShape_Hidung.glb',
+    "Square": '/assets/models/GeneralShape_Hidung.glb',
+    "Oblong": '/assets/models/GeneralShape_Hidung.glb',
+    "Diamond": '/assets/models/GeneralShape_Hidung.glb',
+    "Triangle": '/assets/models/GeneralShape_Hidung.glb'
+  };
+
+  if (!faceShapeToFaceModels[faceShapePrediction]) {
+    console.warn("⚠️ Unknown face shape, fallback to Diamond");
+    faceShapePrediction = "Diamond";
+  }
+
+  const finalFaceModelPath = faceShapeToFaceModels[faceShapePrediction];
+  console.log("🚀 Face model path:", finalFaceModelPath);
+
+  // ---- Load face model ----
+  function loadFace(scene, onLoaded) {
+    loader.load(
+      finalFaceModelPath,
+      (gltf) => {
+        const faceModel = gltf.scene;
+        faceModel.position.set(0, -3.065, 0);
+        faceModel.scale.set(3, 3, 3);
+
+        const group = new THREE.Group();
+        group.add(faceModel);
+        scene.add(group);
+
+        // Apply texture
+        faceModel.traverse((child) => {
+          if (child.isMesh) {
+            child.material = new THREE.MeshStandardMaterial({
+              map: texture,
+              roughness: 1.0,
+              metalness: 1.0,
+              transparent: true,
+              side: THREE.DoubleSide
+            });
+            child.material.needsUpdate = true;
+
+            if (!child.geometry.attributes.uv) {
+              console.warn("⚠️ No UV coordinates for face model");
+            }
+          }
+        });
+
+        allGroups.push(group);
+        onLoaded(group);
+        console.log("✅ Face model loaded successfully:", finalFaceModelPath);
+      },
+      (progress) => console.log(`📦 Loading progress for ${finalFaceModelPath}:`, progress),
+      (error) => {
+        console.error("❌ Failed to load face model:", finalFaceModelPath, error);
+        const fallbackPath = '/assets/models/3D_KAHF_HeadNeck_GeneralShape.glb';
+        if (finalFaceModelPath !== fallbackPath) {
+          console.log("🔄 Trying fallback model:", fallbackPath);
+          loadFace(scene, onLoaded);
+        } else {
+          console.error("💥 Even fallback model failed!");
+          onLoaded(new THREE.Group());
+        }
+      }
+    );
+  }
+
+  // ---- Load hairstyle ----
+  function loadHairstyle(group, path) {
+    loader.load(path, (gltf) => {
+      const hair = gltf.scene;
+      hair.position.set(-0.002, -3.065, -0.01);
+      hair.scale.set(2.95, 3, 3);
+      hair.traverse((child) => {
+        if (child.isMesh) {
+          const oldMap = child.material?.map || null;
+          child.material = new THREE.MeshLambertMaterial({
+            map: oldMap,
+            transparent: true,
+            side: THREE.FrontSide,
+          });
+          child.material.roughness = 1.0;
+          child.material.metalness = 0.0;
+          child.geometry.computeVertexNormals();
+          child.renderOrder = 1;
+        }
+      });
+
+      if (group) {
+        group.children.filter(c => c.name === 'hair').forEach(h => group.remove(h));
+        hair.name = 'hair';
+        group.add(hair);
+      }
+    });
+  }
+
+  // ---- Create scene for a canvas ----
+  function createScene(canvasId, defaultHairPath, isMain = false, cameraY = 2, cameraZ = 2) {
+    const scene = new THREE.Scene();
+    scene.background = null;
+
+    const camera = new THREE.PerspectiveCamera(60, 700 / 450, 0.1, 100);
+    camera.position.set(0, cameraY, cameraZ);
+
+    const canvas = document.getElementById(canvasId);
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      preserveDrawingBuffer: true,
+      antialias: true
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(700, 450);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 3);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+    directionalLight.position.set(4, 3, 5);
+    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 2);
+    directionalLight2.position.set(-4, 3, 5);
+    // const frontLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    // frontLight.position.set(0, 0, 5);
+    const shadowLight = new THREE.DirectionalLight(0xffffff, 1.1);
+    shadowLight.position.set(-2, -2.466, 2.1);
+    const backLight = new THREE.DirectionalLight(0xffffff, 2);
+    backLight.position.set(0, 3, -5);
+    // const backRightLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    // backRightLight.position.set(3, 3, -15);
+    // const backLeftLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    // backLeftLight.position.set(-3, 3, -15);
+    scene.add(ambientLight, directionalLight, directionalLight2, shadowLight, backLight);
+
+    // const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    // controls.enableDamping = true;
+    // controls.enableZoom = true;
+    // controls.enablePan = true;
+    // controls.enableRotate = true;
+    // controls.target.set(0, 2, 0);
+
+    loadFace(scene, (group) => {
+      if (defaultHairPath) loadHairstyle(group, defaultHairPath);
+      if (isMain) modelGroup = group;
+      clearInterval(secc);
+      showScreen('hairstyle');
+
+      setTimeout(() => {
+        $('.hairstyle-item:first-child').click();
+      }, 100);
+    });
+
+    // return { scene, camera, renderer, controls };
+    return { scene, camera, renderer };
+  }
+
+  console.log("Selected Hair Type : ", selectedHairType)
+  const selectedHairTypeUpper = selectedHairType ? selectedHairType.toUpperCase() : "CURLY";
+  console.log("🔹 Selected Hair Type (uppercase):", selectedHairTypeUpper);
+  faceShapePrediction = "Diamond"
+  const hairFiles = hairstyleFiles[faceShapePrediction]?.[selectedHairTypeUpper];
+
+  const names = hairFiles.map(hair => hair.name);
+  const images = hairFiles.map(hair => hair.img);
+  const texts = hairFiles.map(hair => hair.text);
+  console.log("🔹 Hairstyle Names:", names);
+  console.log("🔹 Hairstyle Images:", images);
+  console.log("🔹 Hairstyle Texts:", texts);
+
+  // ---- Initialize canvases ----
+  const view1 = createScene('renderCanvas1', hairFiles[0].model, true, 2, 2);
+  const view2 = createScene('renderCanvas2', hairFiles[1].model, false, 2, 2.7);
+  const view3 = createScene('renderCanvas3', hairFiles[2].model, false, 2, 2.7);
+  const view4 = createScene('renderCanvas4', hairFiles[0].model, false, 2, 2.7);
+
+  $('.model-img-wrapper').each(function(index, i) {
+    $(this).attr('data-hair-name', hairFiles[index].name);
+    $(this).attr('data-prod-img', hairFiles[index].img);
+    $(this).attr('data-prod-text', hairFiles[index].text);
+  })
+
+  // ---- Animate loop ----
+  function animate() {
+    requestAnimationFrame(animate);
+
+    [view1, view2, view3, view4].forEach(v => {
+      // v.controls.update();
+      v.renderer.render(v.scene, v.camera);
+    });
+  }
+  animate();
+
+  // ---- Rotation slider ----
+  const rotationSlider = document.getElementById("rotationSlider");
+  rotationSlider.addEventListener("input", () => {
+    const rotationY = parseFloat(rotationSlider.value);
+    allGroups.forEach(g => g.rotation.y = rotationY);
+  });
+
+  // ---- Update UI description ----
+  function updateUIWithPrediction() {
+    const faceDescElement = document.querySelector("#face-desc p");
+    if (faceDescElement) {
+      const faceShapeData = faceShape.find(item => item.name === faceShapePrediction);
+      if (faceShapeData) faceDescElement.textContent = faceShapeData.description;
+    }
+    console.log("🎯 Face shape applied:", faceShapePrediction);
+  }
+
+  updateUIWithPrediction();
+
+  // ---- Hairstyle selection ----
+  // $('.hairstyle-item').click(function () {
+  //   const index = $(this).data('model-index');
+  //   // const hairstyleOptions = hairstyleModelsMapping[faceShapePrediction]?.[hairType] || [];
+  //   const hairstyleOptions = hairstyleFiles[faceShapePrediction]?.[selectedHairTypeUpper] || [];
+  //   if (!hairstyleOptions.length) {
+  //       console.warn("⚠️ No hairstyle mapping found for:", faceShapePrediction, selectedHairTypeUpper);
+  //       return;
+  //   }
+
+  //   const selected = hairstyleOptions[index];
+  //   if (!selected) return console.warn("⚠️ No hairstyle found at index", index);
+
+  //   // if (modelGroup) loadHairstyle(modelGroup, selected.model);
+  //   if (modelGroup) loadHairstyle(modelGroup, selected); // ✅
+
+
+  //   $('.hairstyle-item').removeClass('active');
+  //   $(this).addClass('active');
+  //   $('.hairstyle-name-2').html(names[index]);
+  //   $('.hair-name').html(name[index]);
+    // });
+
+  $('.hairstyle-item').click(function () {
+  const index = $(this).attr('data-model-index');
+  const selected = hairFiles[index];
+  console.log(selected, index)
+  if (!selected) return;
+
+  if (modelGroup) loadHairstyle(modelGroup, selected.model);
+
+  // $('#prod-img').attr('src', selected.img);
+  // $('#prod-text').html(selected.text);
+
+  $('.model-img-wrapper').removeClass('active');
+  $('.model-img.model-img-wrapper').addClass('active');
+
+  $('.hairstyle-item').removeClass('active');
+  $(this).addClass('active');
+  $('.hairstyle-name-2').html(selected.name); 
+  // $('.hair-name').html(selected.name);
+});
+}
+
+const modelDummyHairstyle = {
+  "oval": {
+    "Straight": [
+      { model: '/assets/models/3D hairFace/Oval/STRAIGHT/model oval_straight_01 BuzzCut.glb', name: 'BUZZ CUT', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Oval/STRAIGHT/model oval_straight_02 TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Oval/STRAIGHT/model oval_straight_03 TexturedQuiff.glb', name: 'TEXTURED QUIFF', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Wavy": [
+      { model: '/assets/models/3D hairFace/Oval/WAVY/model oval_wavy_01 LayeredWaves.glb', name: 'LAYERED WAVES', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Oval/WAVY/model oval_wavy_02 Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Oval/WAVY/model oval_wavy_03 SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Curly": [
+      { model: '/assets/models/3D hairFace/Oval/CURLY/model oval_curly_01 FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Oval/CURLY/model oval_curly_02 SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Oval/CURLY/model oval_curly_03 TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+  },
+  "diamond": {
+    "Straight": [
+      { model: '/assets/models/3D hairFace/Rectangle/STRAIGHT/model CombOver.glb', name: 'FRINGE', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' }, //'/assets/models/3D hairFace/Diamond/STRAIGHT/model diamond_straight_01 Fringe.glb'
+      { model: '/assets/models/3D hairFace/Diamond/STRAIGHT/model diamond_straight_02 HighFade.glb', name: 'HIGH FADE', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Diamond/STRAIGHT/model diamond_straight_03 TexturedCrop.glb', name: 'TEXTURED CROP', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Wavy": [
+      { model: '/assets/models/3D hairFace/Diamond/WAVY/model diamond_wavy_01 FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Rectangle/WAVY/diamond_wavy_02_.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //'/assets/models/3D hairFace/Diamond/WAVY/model diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D hairFace/Diamond/WAVY/model diamond_wavy_03 TexturedWaves.glb', name: 'TEXTURE WAVES', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Curly": [
+      { model: '/assets/models/3D hairFace/Diamond/CURLY/model diamond_curly_01 Fringe.glb', name: 'FRINGE', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Diamond/CURLY/model diamond_curly_02 HighTopCurls.glb', name: 'HIGH TOP CURLS', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Diamond/CURLY/model diamond_curly_03 LayeredTapered.glb', name: 'LAYERED TAPERED', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+  },
+  "oblong": {
+    "Straight": [
+      { model: '/assets/models/3D hairFace/Oblong/STRAIGHT/model Straight_CrewCut.glb', name: 'CREW CUT', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Oblong/STRAIGHT/model Straight_SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Oblong/STRAIGHT/model Straight_SlickBack.glb', name: 'SLICK BACK', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Wavy": [
+      { model: '/assets/models/3D hairFace/Oblong/WAVY/model Wavy_CrewCut.glb', name: 'CREW CUT', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Oblong/WAVY/model Wavy_SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Oblong/WAVY/model Wavy_TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Curly": [
+      { model: '/assets/models/3D hairFace/Oblong/CURLY/model Curly_Fringe.glb', name: 'FRINGE', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Oblong/CURLY/model Curly_LowTapper.glb', name: 'LOW TAPPER', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Oblong/CURLY/model Curly_MediumCurls.glb', name: 'MEDIUM CURLS', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+  },
+  "square": {
+    "Straight": [
+      { model: '/assets/models/3D hairFace/Rectangle/STRAIGHT/model CombOver.glb', name: 'COMB OVER', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Rectangle/STRAIGHT/model RectangleStraightSidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Rectangle/STRAIGHT/model SlickBack.glb', name: 'SLICK BACK', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Wavy": [
+      { model: '/assets/models/3D hairFace/Rectangle/WAVY/model Layered.glb', name: 'LAYERED', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Rectangle/WAVY/model MediumLengthTaper.glb', name: 'MEDIUM LENGTH TAPER', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Rectangle/WAVY/model SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-sleek.png', text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Curly": [
+      { model: '/assets/models/3D hairFace/Rectangle/CURLY/model CurlyUndercut.glb', name: 'UNDERCUT', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Rectangle/CURLY/model Fringe.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Rectangle/CURLY/model ShortTapered.glb', name: 'SHORT TAPERED', img: './assets/images/pomade-sleek.png', text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+  },
+  "round": {
+    "Straight": [
+      { model: '/assets/models/3D hairFace/Round/STRAIGHT/model Straight_Caesar.glb', name: 'CAESAR', img: './assets/images/hair-powder.png', text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Round/STRAIGHT/model Straight_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/pomade-matte.png', text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Round/STRAIGHT/model Straight_Pompadour.glb', name: 'POMPADOUR', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Wavy": [
+      { model: '/assets/models/3D hairFace/Round/WAVY/model Wavy_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Round/WAVY/model Wavy_Fringe.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Round/WAVY/model Wavy_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-sleek.png', text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Curly": [
+      { model: '/assets/models/3D hairFace/Round/CURLY/model Curly_MulletModern.glb', name: 'MULLET', img: './assets/images/hair-powder.png', text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Round/CURLY/model Curly_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png',text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Round/CURLY/model Curly_TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+  },
+  "triangle": {
+    "Straight": [
+      { model: '/assets/models/3D hairFace/Triangle/STRAIGHT/model Medium-LengthSidePart.glb', name: 'SIDE PART', img: './assets/images/hair-powder.png',text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Triangle/STRAIGHT/model Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png', text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Triangle/STRAIGHT/model SpikyCut.glb', name: 'SPIKY CUT', img: './assets/images/pomade-sleek.png', text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Wavy": [
+      { model: '/assets/models/3D hairFace/Triangle/WAVY/model FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Triangle/WAVY/model MediumLengthWaves.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Triangle/WAVY/model TriangleWavySidePart.glb', name: 'QUIFF', img: './assets/images/pomade-sleek.png', text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "Curly": [
+      { model: '/assets/models/3D hairFace/Triangle/CURLY/model HighTopCurls.glb', name: 'HIGH TOP CURLS', img: './assets/images/hair-powder.png', text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D hairFace/Triangle/CURLY/model TaperedFade.glb', name: 'TAPERED FADE', img: './assets/images/pomade-matte.png', text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D hairFace/Triangle/CURLY/model TriangleCurlySidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-sleek.png',text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+  },
+};
+
+
+function captureCanvas() {
+      const canvas = document.getElementById('renderCanvas1');
+    }
+document.getElementById('hairstyle-continue-btn').addEventListener('click', captureCanvas);
+
+let selectedHairStyle = {
+    modelSrc: '',
+    name: '',
+    description: ''
+  };
+
+    // Data untuk setiap hairstyle
+const hairStyleData = {
+  0: {
+    modelSrc: '/assets/models/model-4.glb',
+    name: 'TWO BLOCK',
+    description: 'A relaxed and stylish look with natural waves framing the face. The curtain-style fringe gives off a soft, youthful vibe while maintaining a sense of effortless charm. Perfect for casual everyday wear or characters that embody freedom and creativity.'
+  },
+  1: {
+    modelSrc: '/assets/models/model-5.glb',
+    name: 'BUZZCUT',
+    description: 'A timeless hairstyle that highlights confidence and elegance. With its clean, backward flow and subtle volume, it draws attention to the face and sharpens the overall look. Ideal for formal settings, professional styles, or characters that need a refined, sophisticated presence.'
+  },
+  2: {
+    modelSrc: '/assets/models/model-12.glb',
+    name: 'FRENCH CROP',
+    description: 'A modern, low-maintenance haircut with sharp texture on top and clean sides. This hairstyle balances simplicity with a bold edge, giving off an energetic and masculine vibe. Great for active lifestyles or characters that value strength, practicality, and straightforward style.'
+  }
+};
+
+    // Fungsi untuk mengupdate product screen dengan hairstyle yang dipilih
+function updateProductScreen() {
+  // Update model viewer
+  const modelViewer = document.getElementById('product-model-viewer');
+  if (modelViewer) {
+    modelViewer.setAttribute('src', selectedHairStyle.modelSrc);
+  }
+  
+  // Update nama hairstyle
+  const nameElement = document.getElementById('product-hair-style-name');
+  if (nameElement) {
+    nameElement.textContent = selectedHairStyle.name;
+  }
+  
+  // Update deskripsi hairstyle
+  const descElement = document.getElementById('product-hair-style-desc');
+  if (descElement) {
+    descElement.textContent = selectedHairStyle.description;
+  }
+}
+
+function render3DHairstyle(item, index) {
+  // Always target the first item
+  const firstItem = $("#hairstyle-grid-inner-two .hairstyle-item").first();
+
+  // Create as jQuery element
+  const card = $(`
+    <div class="hairstyle-item active" data-model-index="${index}">
+      <div class="hairstyle-img">
+        <model-viewer 
+          src="${item.model || "/assets/models/fallback.glb"}" 
+          alt="${item.name}" 
+          camera-controls 
+          auto-rotate 
+          shadow-intensity="1" 
+          style="--poster-color: transparent; width: 200px; height: 200px; background: transparent;">
+          <div slot="poster"></div>
+          <div slot="progress-bar"></div>
+        </model-viewer>
+      </div>
+      <span>${item.name}</span>
+      <img class="hairstyle-prod" src="${item.productImg || "./assets/images/fallback.png"}">
+      <div class="hairstyle-name">${item.name}</div>
+    </div>
+  `);
+
+  // Rebind click each time
+  card.on("click", () => {
+    render3DHairstyle(item, index);
+  });
+
+  firstItem.replaceWith(card);
+}
+
+    // Event listener untuk item hairstyle
+document.addEventListener("DOMContentLoaded", function() {
+  // Gunakan event delegation untuk menangani klik pada hairstyle-item
+  document.addEventListener("click", function(e) {
+    const hairstyleItem = e.target.closest(".hairstyle-item");
+    if (hairstyleItem) {
+      const index = hairstyleItem.getAttribute("data-model-index");
+      
+      // Update selectedHairStyle dengan data dari hairStyleData
+      if (hairStyleData[index]) {
+        selectedHairStyle = hairStyleData[index];
+        
+        // Update sidebar jika ada
+        // updateSidebarHairStyle();
+      }
+    }
+  });
+  
+  // Event listener untuk tombol next di hairstyle screen
+  const continueButton = document.getElementById("hairstyle-continue-btn");
+  if (continueButton) {
+    continueButton.addEventListener("click", function() {
+      // Update product screen sebelum menampilkannya
+      updateProductScreen();
+      showScreen('product');
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+      // Hair Type Selection Logic
+      const hairTypeOptions = document.querySelectorAll('.question-list');
+      const hairTypeDetail = document.querySelector('.hair-type-detail');
+      
+      hairTypeOptions.forEach(option => {
+          option.addEventListener('click', function() {
+              // Hapus kelas 'selected' dari semua opsi
+              hairTypeOptions.forEach(opt => opt.classList.remove('selected'));
+              
+              // Tambahkan kelas 'selected' ke opsi yang diklik
+              this.classList.add('selected');
+              
+              // Ambil nilai dari opsi yang dipilih
+              const selectedHairType = this.getAttribute('data-value');
+              
+              // Simpan nilai ke dalam elemen hair-type-detail
+              hairTypeDetail.textContent = selectedHairType;
+              
+              // Simpan pilihan user (bisa dikembangkan untuk disimpan ke database)
+              console.log('User memilih jenis rambut:', selectedHairType);
+
+            // ambil dari userData (pastikan nilai ada)
+            const faceShapeRaw = faceShapePrediction || 'oval'; // fallback kalau undefined
+            const faceShapeKey = String(faceShapeRaw).toLowerCase(); // keys di object mu lowercase: "oval", "diamond", ...
+            // jika user punya pilihan tipe rambut, pakai itu; kalau nggak, ambil tipe pertama tersedia
+            const hairTypeKey = selectedHairType || Object.keys(modelDummyHairstyle[faceShapeKey] || {})[0];
+
+            const selectedList = modelDummyHairstyle[faceShapeKey] && modelDummyHairstyle[faceShapeKey][hairTypeKey];
+
+            if (!selectedList || !Array.isArray(selectedList)) {
+              console.warn('Hairstyles not found for', faceShapeKey, hairTypeKey);
+              // fallback: coba gunakan "Straight" atau keluar
+              // return; // atau tampilkan pesan UI
+            } else {
+              $('.hairstyle-item').each(function(index) {
+                const item = selectedList[index];
+                if (!item) {
+                  // kalau jumlah .hairstyle-item lebih banyak dari data, sembunyikan atau kosongkan
+                  $(this).hide();
+                  return;
+                }
+                $(this).find('model-viewer').attr('src', item.model);
+                $(this).find('span').html(item.name);
+                $(this).find('.hairstyle-prod').attr('src', item.img);
+                $(this).find('.hairstyle-name').html(item.name);
+                // kalau perlu set atribut alt atau data-*:
+                $(this).find('.hairstyle-prod').attr('alt', item.name);
+              });
+            }
+
+          });
+      });
+      
+      // Hairstyle Selection Logic
+      const hairstyleItems = document.querySelectorAll('#hairstyle-list-screen .hairstyle-item');
+      const selectedSlots = document.querySelectorAll('.hairstyle-grid-inner .hairstyle-item');
+      
+      // Inisialisasi state
+      let selectedHairstyles = [
+          { modelSrc: "/assets/models/model-4.glb", name: "TWO BLOCK", recommended: true },
+          { modelSrc: "/assets/models/model-5.glb", name: "BUZZCUT", recommended: true },
+          { modelSrc: "/assets/models/model-12.glb", name: "FRENCH CROP", recommended: true }
+      ];
+      
+      // Fungsi untuk mengupdate tampilan slot yang dipilih
+      function updateSelectedSlots() {
+          selectedSlots.forEach((slot, index) => {
+              if (index < selectedHairstyles.length) {
+                  const hairstyleData = selectedHairstyles[index];
+                  
+                  // Update model-viewer
+                  const modelViewer = slot.querySelector('model-viewer');
+                  modelViewer.setAttribute('src', hairstyleData.modelSrc);
+                  modelViewer.setAttribute('alt', hairstyleData.name);
+                  
+                  // Update nama
+                  const nameElement = slot.querySelector('.hairstyle-name');
+                  nameElement.textContent = hairstyleData.name;
+
+                  // Update tag recommended
+                  const recommendedTag = slot.querySelector('.tag-recommended');
+                  if (hairstyleData.recommended) {
+                      if (!recommendedTag) {
+                          const newTag = document.createElement('span');
+                          newTag.className = 'tag-recommended';
+                          newTag.innerHTML = '<label>RECOMMENDED</label>';
+                          slot.querySelector('.hairstyle-img').appendChild(newTag);
+                      }
+                  } else if (recommendedTag) {
+                      recommendedTag.remove();
+                  }
+
+                  console.log('Slot', index, 'updated with', hairstyleData);
+              }
+          });
+          
+          console.log('Gaya rambut terpilih:', selectedHairstyles);
+      }
+      
+      // Event listener untuk item gaya rambut
+      hairstyleItems.forEach(item => {
+          item.addEventListener('click', function() {
+              // Dapatkan data dari item yang diklik
+              const modelSrc = this.getAttribute('data-model-src');
+              const name = this.getAttribute('data-name');
+              const recommended = this.getAttribute('data-recommended') === 'true';
+            
+              console.log('Item clicked:', { modelSrc, name, recommended });
+              
+              // Tambahkan item baru di awal array
+              selectedHairstyles.unshift({
+                  modelSrc,
+                  name,
+                  recommended
+              });
+              
+              // Jika lebih dari 3 item, hapus item terakhir
+              if (selectedHairstyles.length > 3) {
+                  selectedHairstyles.pop();
+              }
+              
+              // Update tampilan
+              updateSelectedSlots();
+              
+              // Tandai item yang dipilih
+              hairstyleItems.forEach(i => i.classList.remove('selected'));
+              this.classList.add('selected');
+          });
+      });
+      
+      // Inisialisasi tampilan
+      updateSelectedSlots();
+  });
+  
+  $("#loading-screen .icon-back").on("click", function () {
+    showScreen("pageQuestionHair");
+  });
+  
+</script>
+
+<script type="module" src="/assets/js/ui.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/images/favicon.png" sizes="any" />
+  <title>KAHF Virtual Hair Try-On 2025</title>
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/assets/css/hair-style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script>
+    let eulerY = 0;
+  </script>
+  <script type="module" src="/assets/js/owl.carousel.min.js"></script>
+  <script src="/assets/js/three.min.js"></script>
+  <script src="/assets/js/GLTFLoader.js"></script>
+  <script type="module" src="/assets/js/OrbitControls.js"></script>
+  <script src="/assets/js/dom-to-image.min.js"></script>
+  <script src="/assets/js/jquery-3.6.0.min.js"></script>
+  <script type="module" src="/assets/js/model-viewer.min.js"></script>
+  <script src="/assets/js/qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
+</head>
+
+<body>
+  <div class="kahf-container">
+    <section id="home-page-hair" class="home-page kahf-screen">
+      <img class="logo" src="/assets/images/KV-Hair.png" alt="">
+      <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+      <img class="logo-desc" src="/assets/images/kahf-desc.png" alt="">
+      <div class="d-flex gap-3 mt-5 justify-content-center align-items-center">
+        <button id="button-scan-qr" class="kahf-btn kahf-btn-accent d-none" style="width: 220px; pointer-events: none;">
+          SCAN QR
+        </button>
+        <div id="qr-popup" class="qr-popup">
+          <div class="qr-popup-content">
+            <span class="qr-close">&times;</span>
+            <h2>Scan QR Code</h2>
+            <div id="qr-reader" style="width: 300px; height: 300px; margin-top: 10px;"></div>
+          </div>
+        </div>
+        <button id="button-fill-form" class="kahf-btn kahf-btn-accent d-none" style="width: 220px;">
+          FILL FORM
+        </button>
+        <div id="instruct-home" class="instruct d-none">NO QR? START HERE</div>
+        <div class="splash-loading justify-content-center align-items-center">
+          <i class="fas fa-spinner fa-spin me-2"></i>
+          <span>Please Wait</span>
+        </div>
+      </div>
+    </section>
+    <section id="register-form" class="p-0 register kahf-screen regist hidden" >
+      <img class="icon-back" src="/assets/images/icon-back.png" alt="">
+      <img class="logo-regist" src="/assets/images/logo-kahf.png" alt="">
+      <div class="title" style="padding: 15%;">
+        <img class="title-cover" src="/assets/images/title-cover.png" alt="">
+        <h2>REGISTER <br>
+        TO DECODE</h2>
+        <h3>FILL IN YOUR DETAILS TO UNLOCK<br>
+        THE EXPERIENCE.</h3>
+        <form style="position: absolute; top: 42.5%; left:18%; width:46%;" id="regist-form">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" class="name" placeholder="your name" required>
+          <label for="phone">Whatsapp Number</label>
+          <input type="number" id="phone" class="phone" placeholder="your number" required inputmode="numeric" pattern="[0-9]*">
+        </form>
+        <div class="checkbox-group">
+        <label class="checkbox-item">
+          <input type="checkbox" id="privacy-required" required>
+          <span class="checkbox-span">See our <a href="#">Privacy Policy</a> for more information.</span>
+        </label>
+
+        <label class="checkbox-item-2">
+          <input type="checkbox" id="privacy">
+          <span  class="checkbox-span-2">I agree to receive promotional & further information from Kahf (Optional)</span>
+        </label>
+      </div>
+        <button type="submit" id="regist-submit-btn" class="kahf-btn kahf-btn-accent disabled" disabled>NEXT</button>
+      </div>
+    </section>
+    <section id="face-scan-hair" class="face-scan p-0 kahf-screen page-stye-1 hidden">
+      <div class="header">
+        <img class="icon-back" src="/assets/images/icon-back.png" alt="">
+        <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+        <img class="logo" src="/assets/images/logo-scan-wajah.png" alt="">
+      </div>
+
+      <!-- INTRO -->
+      <div class="intro-text">
+        <h2 class="greeting">HAI !!!</h2>
+        <p class="desc">
+          WE'LL ANALYZE YOUR FACE SHAPE TO SUGGEST SUITABLE HAIRSTYLES AND PRODUCTS.
+        </p>
+      </div>
+
+      <div id="face-scan-container" class="mb-3">
+        <img class="ellipse" src="/assets/images/ellipse.png" alt="">
+        <div class="scan-helper-container" id="scan-helper">
+          <div class="scan-helper-text" id="scan-helper-text"></div>
+          <div class="scan-progress">
+            <div class="progress-bar" id="scan-progress"></div>
+          </div>
+        </div>
+      </div>
+      <button id="scan-btn" class="kahf-btn kahf-btn-accent">
+        <span>SCAN</span>
+      </button>
+    </section>
+    <!-- Question Hair -->
+    <section id="page-question-hair" class="question p-0 kahf-screen page-stye-1 hidden">
+      <div class="header">
+      <img class="icon-back" src="/assets/images/icon-back.png" alt="">
+      </div>
+      <img class="logo" src="/assets/images/question-logo.png" alt="">
+      <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+      <div class="heading-with-image flex items-center gap-4">
+        <h2>APA TIPE RAMBUTMU?</h2>
+        <div class="question-wrapper2 question-text-container">
+          <div class="question-list question-text" data-value="Straight">
+            <span>YOUR PHOTO</span>
+          <img id="your-photo" src="./assets/images/Straight-Model.png" alt="Your Photo">
+        </div>
+      </div>
+      <div class="question-wrapper question-text-container">
+        <div class="question-list question-text" data-value="Straight" id="button-to-hairstyle1">
+          <span>Straight</span>
+          <img src="./assets/images/Straight-1.png">
+        </div>
+        <div class="question-list question-text" data-value="Wavy" id="button-to-hairstyle2">
+          <span>Wavy</span>
+          <img src="./assets/images/Wavy-1.png">
+        </div>
+        <div class="question-list question-text" data-value="Curly" id="button-to-hairstyle3">
+          <span>Curly</span>
+          <img src="./assets/images/Curly-1.png">
+        </div>
+        <div class="question-list question-text" data-value="Coily" id="button-to-hairstyle4">
+          <span>Tight Curly</span>
+          <img src="./assets/images/Tight Curly-1.png">
+        </div>
+      </div>
+
+    </section>
+    <section id="loading-screen" class="loading p-0 kahf-screen page-stye-1 hidden">
+      <div class="header">
+        <!-- <img class="icon-back" src="/assets/images/icon-back.png" alt=""> -->
+      </div>
+      <img class="logo" src="/assets/images/loading-logo.png" alt="">
+      <img class="logo-decode" src="/assets/images/kahf-logo.png" alt="">
+      <img class="logo-desc" src="/assets/images/kahf-desc.png" alt="">
+      <div class="result-loading justify-content-center align-items-center">
+          <i class="custom-spinner me-2"></i>
+          <span>Please Wait</span>
+        </div>
+    </section>
+    <section id="face-result-screen" class="kahf-screen hidden">
+      <img class="logo mb-5" width="30%" style="max-width: 200px;" src="/assets/images/logo-hair.png" alt="">
+      <button class="kahf-btn kahf-btn-accent back-btn">
+        <span>Back</span>
+      </button>
+      <div class="face-shape-card">
+        <div class="d-flex gap-5 justify-content-center mb-4">
+          <!-- Foto user -->
+          <div class="wrapper-captured captured-left">
+            <img id="preview-img" src="/assets/images/default.png" alt="Preview">
+            <div class="shape-name">Your Photo</div>
+          </div>
+          <!-- Hasil prediksi -->
+          <div class="wrapper-captured captured-right">
+            <img id="result-img" src="/assets/images/default.png" alt="Result">
+            <div class="shape-name" id="result-shape">Result</div>
+          </div>
+        </div>
+
+        <!-- Info hasil prediksi -->
+        <div class="face-shape-info mb-4">
+          <p class="mb-2 shape-title">Face Shape Result</p>
+          <p class="shape-desc" id="shape-desc">
+            Upload your face photo to get recomendation.
+          </p>
+        </div>
+      </div>
+
+
+    <button id="result-continue-btn" class="kahf-btn kahf-btn-accent">
+      CONTINUE
+    </button>
+    </section>
+    <!-- Hairstyle Selection Screen -->
+    <section id="hairstyle-screen" class="hairstyle kahf-screen page-stye-2 hidden">
+      <img class="icon-back" src="/assets/images/icon-back.png" alt="">
+      <!-- <img class="logo-decode" src="/assets/images/logo-decode-1.png" alt=""> -->
+      <img class="logo" src="/assets/images/hairstyle-logo.png" alt="">
+      <!-- <h1 class="kahf-title mb-5">Hairstyle Selection</h1> -->
+      <div class="hairstyle-name-2">
+         QUIFF
+      </div>
+      <div class="hair-style">
+        HAIR STYLE
+      </div>
+      <!-- Three.js Container - Single consistent element -->
+      <div class="hairstyle-grid">
+        <div class="hairstyle-grid-inner-two">
+          <div class="hairstyle-item active" data-model-index="0">
+            <div class="hairstyle-img">
+              <model-viewer src="/assets/models/model-quiff.glb" alt="A 3D model" style="--poster-color: transparent;">
+                <div slot="poster"></div>
+                <div slot="progress-bar"></div>
+              </model-viewer>
+            </div>
+            <img class="hairstyle-prod" src="./assets/images/hair-powder.png">
+            <div class="hairstyle-name">QUIFF</div>
+          </div>
+          <div class="hairstyle-item" data-model-index="1">
+            <div class="hairstyle-img">
+              <model-viewer src="/assets/models/model-layered.glb" alt="A 3D model" style="--poster-color: transparent;">
+                <div slot="poster"></div>
+                <div slot="progress-bar"></div>
+              </model-viewer>
+            </div>
+            <img class="hairstyle-prod" src="./assets/images/pomade-matte.png">
+            <div class="hairstyle-name">LAYERED</div>
+          </div>
+          <div class="hairstyle-item" data-model-index="2">
+            <div class="hairstyle-img">
+              <model-viewer src="/assets/models/model-slickback.glb" alt="A 3D model" style="--poster-color: transparent;">
+                <div slot="poster"></div>
+                <div slot="progress-bar"></div>
+              </model-viewer>
+            </div>
+            <img class="hairstyle-prod" src="./assets/images/pomade-sleek.png">
+            <div class="hairstyle-name">SLICK BACK</div>
+          </div>
+        </div>
+      </div>
+      
+      <button id="button-style-vault" class="kahf-btn kahf-btn-accent button-small">
+        more hair style (200)
+      </button>
+
+      <div class="scene-container">
+        <canvas id="renderCanvas1"></canvas>
+        <!-- <model-viewer auto-rotate camera-controls id="hair_0" src="/assets/models/hair-1.glb" data-hair="hair-1" alt="A 3D model"></model-viewer>
+        <model-viewer auto-rotate camera-controls id="hair_1" src="/assets/models/hair-2.glb" data-hair="hair-2" alt="A 3D model"></model-viewer>
+        <model-viewer auto-rotate camera-controls id="hair_2" src="/assets/models/hair-3.glb" data-hair="hair-3" alt="A 3D model"></model-viewer> -->
+        <!-- <div class="scene-name"></div> -->
+        <!-- Three.js will create its own canvas here -->
+        <!-- <img class="rotate-icon" src="/assets/images/rotate-icon.png" alt=""> -->
+        <div class="face-desc" id="face-desc">
+          <p>The most balanced and versatile face shape, with a slightly wider forehead than jawline. Almost any hairstyle works well, from short, sharp crops to longer, layered looks, giving you the freedom to experiment. </p>
+        </div>
+        <div class="rotate-controls">
+          <button id="btnLeft" class="kahf-btn kahf-btn-accent">&laquo;</button>
+          <button id="btnRight" class="kahf-btn kahf-btn-accent">&raquo;</button>
+        </div>
+      </div>
+      <button id="hairstyle-continue-btn" class="kahf-btn kahf-btn-accent">
+        NEXT
+      </button>
+    </section>
+    <!-- Hairstyle List Selection Screen -->
+    <section id="hairstyle-list-screen" class="p-0 kahf-screen page-stye-1 hidden"> 
+      <div class="header">
+        <img class="icon-back" src="/assets/images/icon-back.png" alt="">
+        <img class="logo" src="/assets/images/hair-list-logo.png" alt="">
+      </div>
+
+      <!-- FULL HAIRSTYLE GRID -->
+      <div class="hairstyle-grid">
+        <div class="hairstyle-grid-inner">
+          <div id="hairstyle-grid-inner-list" class="hairstyle-grid-inner-list">
+            <div class="loading-indicator">
+              <p>Loading hairstyles...</p>
+            </div>
+            <!-- All processed hairstyles will be rendered here dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Recommendation Screen -->
+    <section id="product-hair-screen" class="p-0 kahf-screen page-stye-1 hidden">
+      <div class="header">
+        <img class="icon-back" id="icon-back-white" src="/assets/images/icon-back-white.png" alt="">
+        <span class="title-name">FADLY</span>
+        <span class="title-decode">/DECODE HAIR</span>
+      </div>
+      <div class="sidebar-prod">
+        HAIRSTYLE
+      </div>
+      <!-- Hasil Grid -->
+      <div class="result-card" style="display: block;">
+        <div class="result-grid">
+          <!-- row 1 -->
+          <div class="haircut">
+            <!-- <img src="./assets/images/french-crop.png" alt="French Crop">
+            <p>FRENCH CROP</p> -->
+          </div>
+          <div class="info face-shape">
+            <h3 style="font-size: 17px;">FACE SHAPE:</h3>
+            <div class="value" id="face-type">OVAL</div>
+            <img id="face-shape-img" src="./assets/images/oval-1.png" alt="Oval">
+          </div>
+          <!-- row 2 -->
+          <div class="haircut">
+            <!-- <img src="./assets/images/taper-fade.png" alt="Taper Fade">
+            <p>TAPER FADE</p> -->
+          </div>
+          <div class="info hair-type">
+            <h4>HAIR TYPE:</h4>
+            <div class="value hair-type-detail">CURLY</div>
+            <img class="result-hair-type" src="./assets/images/curly.png" alt="Curly">
+          </div>
+          <!-- row 3 -->
+          <div class="haircut">
+            <!-- <img src="./assets/images/side-part.png" alt="Side Part">
+            <p>SIDE PART</p> -->
+          </div>
+          <div class="info product">
+            <h5>PRODUCTS RECOMMENDATION</h5>
+            <div class="prod-detail">
+              <img id="prod-img" src="./assets/images/hair-powder.png" alt="Kahf">
+              <p id="prod-text">KAHF VOLUMIZED<br>
+                SUAVE HAIR<br>
+                POWDER</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="model-img model-img-wrapper active" id="model-img" style="overflow: hidden;">
+          <img id="result-hairstyle-img">
+        </div>
+        <div class="model-img-2 model-img-wrapper" data-index="1" style="overflow: hidden;">
+          <canvas id="renderCanvas2"></canvas>
+          <!-- <img id="result-hairstyle-img-2"> -->
+        </div>
+        <div class="model-img-3 model-img-wrapper" data-index="2" style="overflow: hidden;">
+          <canvas id="renderCanvas3"></canvas>
+          <!-- <img id="result-hairstyle-img-3"> -->
+        </div>
+      </div>
+      <!-- Button -->
+      <div class="group-button d-flex gap-4 button-inline-wrapper justify-content-center align-items-center">
+        <button id="finish-page-hair-product" class="button-to-home kahf-btn kahf-btn-accent" style="width: 30%;">
+          FINISH
+        </button>
+        <button id="download-result" class="kahf-btn kahf-btn-accent" style="width: 30%; pointer-events: none;">
+          DOWNLOAD
+        </button>
+        <!-- <button id="share-result" class="kahf-btn kahf-btn-accent" style="width: 30%" onclick="generateResultQR()">
+          SHARE
+        </button>
+        <div id="qrModal" class="qr-modal">
+          <div class="qr-modal-content">
+            <span class="close">&times;</span>
+            <h3 class="qr-text">Scan QR Code For Share Your Result</h3>
+            <div id="qr_image_modal" style="display: inline-block;">
+            </div>
+          </div>
+        </div> -->
+    </section>
+  </div>
+
+  <div id="captured-photo">
+  </div>
+
+<script type="importmap">
+    {
+        "imports": {
+        "three": "/assets/js/three.module.js",
+        "three/addons/": "/assets/js/three/addons/",
+        "mindar-face-three":"/assets/js/mindar-face-three.prod.js"
+        }
+    }
+</script>
+
+<script>
+// ===== GLOBAL VARIABLES =====
+let html5QrCode = null;
+let data_global_texture = null;
+let remaining_gallery = null;
+let centerBase64 = null;
+let currentBatchIndex = 0;
+let uploadedFaceBase64 = null;
+let face_url = null;
+let registeredName = "";
+let selectedHairStyleName = "";
+let capturedImages = [];
+let currentAngle = 0;
+let targetAngle = 0;
+let texturePath = '';
+let qrCode = null;
+let qrResult = null;
+let centerFace = null;
+
+// Screen elements
+const screens = {
+    profile: $('#profile-screen'),
+    splash: $('#splash-screen'),
+    landing: $('#landing-screen'),
+    startScan: $('#start-qr-screen'),
+    loading: $('#loading-screen'),
+    homePageHair: $('#home-page-hair'),
+    scan: $('#face-scan-screen'),
+    result: $('#face-result-screen'),
+    hairstyle: $('#hairstyle-screen'),
+    pageQuestionHair: $('#page-question-hair'),
+    hairstyleList: $('#hairstyle-list-screen'),
+    registForm: $('#register-form'),
+    product: $('#product-hair-screen'),
+    scanAnalyzer: $('#skin-analyzer-splash'),
+    scanHairAnalyzer: $('#hair-analyzer-splash'),
+    scanSkin: $('#face-scan-skin'),
+    scanHair: $('#face-scan-hair'),
+    scanAnalyzerSelection: $('#skin-analyzer-selection'),
+    homePage: $('#home-page'),
+    pageForm: $('#page-form'),
+    pageIntro: $('#page-intro'),
+    pageResultSkin: $('#page-result'),
+    pageSkinResult: $('#face-result-skin'),
+    pageSkinScore: $('#page-skin-score'),
+    pageSkinProduct: $('#page-result-product'),
+    pageQuestionAge: $('#page-question-age'),
+    questionSkinCondition: $('#page-question-skin-condition'),
+    questionDirectSunlight: $('#page-question-direct-sunlight'),
+    questionPersonalConcern: $('#page-question-dry-concerns'),
+    questionLivein: $('#page-question-livein'),
+    questionDescribeSkin: $('#page-question-describe-skin'),
+    questionPoresSkin: $('#page-question-pores'),
+    questionAfternoon: $('#page-question-afternoon'),
+    questionBlemishes: $('#page-question-blemishes'),
+    questionMorning: $('#page-question-morning'),
+    questionNormalSkin: $('#page-question-normal-concerns'),
+    questionOilySkin: $('#page-question-oily-concerns'),
+    questionCombinationSkin: $('#page-question-combination-concerns'),
+    questionDullSkin: $('#page-question-dull-concerns'),
+    questionDrySkin: $('#page-question-dry-concerns'),
+    questionAcneSkin: $('#page-question-acne-concerns'),
+    resultSkinType: $('#page-result-skintype')
+};
+
+// Data structures
+const faceShape = [
+  {
+    name: "Oval",
+    image: "/assets/images/oval.png",
+    description:
+      "The most balanced and versatile face shape, with a slightly wider forehead than jawline. Almost any hairstyle works well, from short, sharp crops to longer, layered looks, giving you the freedom to experiment.",
+  },
+  {
+    name: "Round",
+    image: "/assets/images/round.png",
+    description:
+      "Characterized by equal width and length with soft jawlines. Hairstyles that add height and volume on top help elongate the face, while keeping the sides shorter for a sharper, more defined appearance.",
+  },
+  {
+    name: "Square",
+    image: "/assets/images/square.png",
+    description:
+      "Defined by a strong, angular jawline and balanced proportions. Textured or layered cuts help soften sharp angles, adding movement and balance without losing the masculine edge.",
+  },
+  {
+    name: "Rectangle",
+    image: "/assets/images/oblong.png",
+    description:
+      "Longer than it is wide, with a straight jawline. Styles with added volume on the sides help balance the length, while avoiding excessive height on top to keep proportions in check.",
+  },
+  {
+    name: "Oblong",
+    image: "/assets/images/oblong.png",
+    description:
+      "Longer than it is wide, with a straight jawline. Styles with added volume on the sides help balance the length, while avoiding excessive height on top to keep proportions in check.",
+  },
+  {
+    name: "Heart",
+    image: "/assets/images/heart.png",
+    description:
+      "A broad forehead that tapers to a narrow, pointed chin. Hairstyles that add fullness and texture around the jawline create harmony and draw attention to the eyes and cheekbones.",
+  },
+  {
+    name: "Diamond",
+    image: "/assets/images/diamond.png",
+    description:
+      "Wide cheekbones with a narrow forehead and chin. Best paired with styles that bring volume or bangs to the forehead, balancing the width and adding softness to the overall look.",
+  },
+  {
+    name: "Triangle",
+    image: "/assets/images/triangular.png",
+    description:
+      "A wider jawline compared to the forehead. Opt for hairstyles with volume and fullness at the crown to balance proportions and add height, creating a more even silhouette.",
+  },
+];
+
+const products = [
+    { name: 'QUIFF', img: "./assets/images/hair-powder.png", alt: "Kahf", text: "KAHF VOLUMIZED <br> SUAVE HAIR <br> POWDER" },
+    { name: 'LAYERED', img: "./assets/images/pomade-matte.png", alt: "Kahf", text: "KAHF MATTE <br> DAPPER WATER <br> BASED POMADE" },
+    { name: 'SLICK BACK', img: "./assets/images/pomade-sleek.png", alt: "Kahf", text: "KAHF SLEEK <br> CLASSY WATER <br> BASED POMADE" }
+];
+
+const hairTypeImages = {
+    "Straight": "./assets/images/Straight-1.png",
+    "Wavy": "./assets/images/Wavy-1.png",
+    "Curly": "./assets/images/Curly-1.png",
+    "Tight Curly": "./assets/images/Tight Curly-1.png"
+};
+
+const hairStyleData = {
+    0: { modelSrc: '/assets/models/model-4.glb', name: 'TWO BLOCK', description: 'A relaxed and stylish look...' },
+    1: { modelSrc: '/assets/models/model-5.glb', name: 'BUZZCUT', description: 'A timeless hairstyle...' },
+    2: { modelSrc: '/assets/models/model-12.glb', name: 'FRENCH CROP', description: 'A modern, low-maintenance haircut...' }
+};
+
+// ===== UTILITY FUNCTIONS =====
+function showScreen(screenName) {
+    Object.values(screens).forEach(screen => {
+        $(screen).addClass('hidden');
+    });
+    $(screens[screenName]).removeClass('hidden');
+}
+
+function validateForm() {
+    const nameInput = document.getElementById("name");
+    const phoneInput = document.getElementById("phone");
+    const requiredCheckbox = document.getElementById("privacy-required");
+    const submitBtn = document.getElementById("regist-submit-btn");
+    
+    const nameFilled = nameInput.value.trim() !== "";
+    const phoneFilled = phoneInput.value.trim() !== "";
+    const checkboxChecked = requiredCheckbox.checked;
+
+    if (nameFilled && phoneFilled && checkboxChecked) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove("disabled");
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add("disabled");
+    }
+}
+
+function updateFaceShapeUI(prediction) {
+    const result = faceShape.find(
+        item => item.name.toLowerCase() === prediction.toLowerCase()
+    );
+
+    if (result) {
+        document.getElementById("face-type").textContent = result.name;
+        document.getElementById("face-shape-img").src = result.image;
+        document.getElementById("face-shape-img").alt = result.name;
+        document.querySelector("#face-desc p").textContent = result.description;
+    } else {
+        document.getElementById("face-type").textContent = "Unknown";
+        document.getElementById("face-shape-img").src = "";
+        document.querySelector("#face-desc p").textContent = "No description available.";
+    }
+}
+
+function updateProduct(index) {
+    const product = products[index];
+    if (!product) return;
+    
+    const prodImg = document.getElementById("prod-img");
+    const prodText = document.getElementById("prod-text");
+    
+    prodImg.src = product.img;
+    prodImg.alt = product.alt;
+    prodText.innerHTML = product.text;
+    $(".hairstyle-name-2").html(product.name);
+}
+
+function updateProductScreen() {
+    const modelViewer = document.getElementById('product-model-viewer');
+    const nameElement = document.getElementById('product-hair-style-name');
+    const descElement = document.getElementById('product-hair-style-desc');
+    
+    if (modelViewer) modelViewer.setAttribute('src', selectedHairStyle.modelSrc);
+    if (nameElement) nameElement.textContent = selectedHairStyle.name;
+    if (descElement) descElement.textContent = selectedHairStyle.description;
+}
+
+function captureCanvas() {
+    const canvas = document.getElementById('renderCanvas1');
+    try {
+        const imageData = canvas.toDataURL('image/png');
+        displayCapturedImage(imageData);
+    } catch (e) {
+        console.error("Error capturing canvas:", e);
+    }
+}
+
+function displayCapturedImage(imageData) {
+    const capturedImage = document.getElementById('result-hairstyle-img');
+    capturedImage.src = imageData;
+    capturedImage.style.display = 'block';
+}
+
+function generateResultQR() {
+    if (!qrResult) {
+        qrResult = new QRCode("qr_image_modal", {
+            text: "https://www.kahfeveryday.com/",
+            width: 256,
+            height: 256,
+            colorDark: "#3f4939",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    } else {
+        qrResult.clear();
+        qrResult.makeCode("https://www.kahfeveryday.com/");
+    }
+    
+    console.log("QR Code generated for result.");
+    document.getElementById("qrModal").style.display = "flex";
+}
+
+// ===== API FUNCTIONS =====
+async function loadYourPhoto() {
+    try {
+        const res = await fetch("/api/latest-face");
+        const data = await res.json();
+
+        if (data.success && data.face_base64) {
+            const imgEl = document.getElementById("your-photo");
+            imgEl.src = `data:image/png;base64,${data.face_base64}`;
+        }
+    } catch (err) {
+        console.error("Failed to load your photo:", err);
+    }
+}
+
+// ===== RENDERING FUNCTIONS =====
+function renderAllHairstyles(hairResults) {
+    const grid = document.getElementById("hairstyle-grid-inner-list");
+    if (!grid) return console.error("Could not find hairstyle-grid-inner-list element");
+
+    grid.innerHTML = "";
+
+    hairResults.forEach((item, index) => {
+        const container = document.createElement("div");
+        container.classList.add("hairstyle-item");
+        container.setAttribute("data-model-index", index);
+        container.setAttribute("data-name", item.name || `Hairstyle ${index + 1}`);
+        container.style.opacity = "0";
+
+        const recommendedTag = item.recommended
+            ? `<span class="tag-recommended"><label>RECOMMENDED</label></span>`
+            : "";
+
+        const img = new Image();
+        img.src = item.output_url;
+        img.alt = item.name || `Hairstyle ${index + 1}`;
+        img.style.maxWidth = "150px";
+        img.style.margin = "5px";
+
+        const label = document.createElement("div");
+        label.classList.add("hairstyle-name");
+        label.textContent = item.name || `Hairstyle ${index + 1}`;
+        label.style.textAlign = "center";
+
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("hairstyle-img");
+        if (recommendedTag) wrapper.innerHTML = recommendedTag;
+        wrapper.appendChild(img);
+
+        container.appendChild(wrapper);
+        container.appendChild(label);
+        grid.appendChild(container);
+
+        setTimeout(() => {
+            container.style.transition = "opacity 0.5s";
+            container.style.opacity = "1";
+        }, 50 * index);
+    });
+
+    console.log(`All ${hairResults.length} hairstyles rendered.`);
+}
+
+function renderFirstThreeImages(hairstyleData) {
+    const gridInnerList = document.getElementById('first-three-grid-inner-list');
+    if (!gridInnerList) return console.error("Could not find first-three-grid-inner-list element");
+
+    gridInnerList.innerHTML = '';
+
+    hairstyleData.forEach((item, index) => {
+        const hairstyleItem = document.createElement('div');
+        hairstyleItem.className = 'hairstyle-item';
+        hairstyleItem.setAttribute('data-model-index', index);
+        hairstyleItem.setAttribute('data-name', item.name || 'Hairstyle');
+
+        const recommendedTag = item.recommended
+            ? `<span class="tag-recommended"><label>RECOMMENDED</label></span>` : '';
+
+        hairstyleItem.innerHTML = `
+            <div class="hairstyle-img">
+                <img src="data:image/png;base64,${item.output_base64}" alt="${item.name || 'Hairstyle'}" />
+                ${recommendedTag}
+            </div>
+            <div class="hairstyle-name">${item.name || 'Hairstyle'}</div>
+        `;
+
+        gridInnerList.appendChild(hairstyleItem);
+    });
+
+    console.log(`Rendered ${hairstyleData.length} first-three hairstyle items`);
+}
+
+// ===== SCAN & CAPTURE FUNCTIONS =====
+async function completeScan() {
+    console.log("Completing scan process...");
+    try {
+        $('#scan-progress').css('width', '100%');
+        $('#scan-helper-text').text('Scanning Complete...');
+
+        setTimeout(() => {
+            $('#scan-helper-text').text('Analyzing...');
+        }, 500);
+
+        const photoContainer = document.querySelector("#captured-photo");
+        if (photoContainer) photoContainer.innerHTML = "";
+
+        console.log("Captured count: 1");
+        console.log("Captured Images Array:", capturedImages);
+        
+        if (capturedImages.length > 0) {
+            const straightImage = capturedImages.find(img => img.orientation === "straight");
+            const leftImage = capturedImages.find(img => img.orientation === "left");
+            const rightImage = capturedImages.find(img => img.orientation === "right");
+
+            $('#your-photo').attr('src', straightImage.dataUrl);
+            if (straightImage) $('<img>').addClass('straight-face').attr('src', straightImage.dataUrl).appendTo('#captured-photo');
+            if (leftImage) $('<img>').addClass('left-face').attr('src', leftImage.dataUrl).appendTo('#captured-photo');
+            if (rightImage) $('<img>').addClass('right-face').attr('src', rightImage.dataUrl).appendTo('#captured-photo');
+
+            const straightFaceSrc = straightImage?.dataUrl?.split(",")[1];
+            centerFace = straightFaceSrc;
+            const leftFaceSrc = leftImage?.dataUrl?.split(",")[1];
+            const rightFaceSrc = rightImage?.dataUrl?.split(",")[1];
+            uploadedFaceBase64 = straightFaceSrc;
+
+            console.log("Captured Images:", {
+                straight: !!straightFaceSrc,
+                left: !!leftFaceSrc,
+                right: !!rightFaceSrc
+            });
+            
+            if (straightFaceSrc && leftFaceSrc && rightFaceSrc) {
+                console.log("Uploading images to backend...");
+                showScreen('pageQuestionHair');
+                
+                fetch("/api/upload-face", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        center: straightFaceSrc,
+                        left: leftFaceSrc,
+                        right: rightFaceSrc
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.overlay_base64_raw) {
+                        console.log("Creating frontend Image from base64...");
+                        const textureImg = new Image();
+                        textureImg.src = "data:image/png;base64," + data.overlay_base64_raw;
+                        centerBase64 = data.overlay_base64_raw;
+                        data_global_texture = "data:image/png;base64," + data.final_uv_overlay;
+                        remaining_gallery = data.remaining_gallery_base64;
+                        face_url = data.face_url;
+
+                        Object.assign(textureImg.style, {
+                            maxWidth: "300px",
+                            border: "2px solid #333",
+                            display: "block",
+                            marginTop: "10px"
+                        });
+
+                        document.querySelector("#captured-photo").appendChild(textureImg);
+                        texturePath = textureImg;
+                    } else {
+                        console.warn("texture_base64 is missing from API response");
+                    }
+
+                    console.log("Texture path set to:", texturePath);
+                    console.log("API response received:", data);
+
+                    if (data.hairfastgan_results && data.hairfastgan_results.length > 0) {
+                        lazyNine = data.face_base64;
+                        uploadedFaceBase64 = data.face_base64;
+                        renderAllHairstyles(data.hairfastgan_results);
+                        console.log("Hairstyle data rendered:", data.hairfastgan_results);
+                    } else {
+                        console.warn("No hairstyle data in API response");
+                    }
+
+                    if (data.predictions?.center?.class) {
+                        console.log("Updating face shape UI with:", data.predictions.center.class);
+                        updateFaceShapeUI(data.predictions.center.class);
+                    } else {
+                        console.warn("Predictions center.class is missing");
+                    }
+
+                    console.log("Face shape UI updated.");
+                    initThreeScene();
+                    console.log("Three.js scene initialized.");
+                    console.log("Predictions:", data.predictions);
+                    console.log("Result image saved at:", data.saved_path);
+
+                    const predictionsDiv = document.createElement("div");
+                    predictionsDiv.innerHTML = `
+                        <h3>Face Shape Predictions</h3>
+                        <p><strong>Center:</strong> ${data.predictions?.center?.class || "-"} (${data.predictions?.center?.confidence || "-"})</p>
+                        <p><strong>Left:</strong> ${data.predictions?.left?.class || "-"} (${data.predictions?.left?.confidence || "-"})</p>
+                        <p><strong>Right:</strong> ${data.predictions?.right?.class || "-"} (${data.predictions?.right?.confidence || "-"})</p>
+                    `;
+                    document.querySelector("#captured-photo").appendChild(predictionsDiv);
+
+                    if (data.overlay_base64_raw) {
+                        console.log("Displaying overlay image from API response");
+                        console.log("Overlay base64 length:", data.overlay_base64_raw?.length);
+                        const resultImg = document.createElement("img");
+                        resultImg.src = "data:image/png;base64," + data.overlay_base64_raw;
+                        Object.assign(resultImg.style, {
+                            maxWidth: "300px",
+                            border: "2px solid #333",
+                            display: "block",
+                            marginTop: "10px"
+                        });
+                        document.querySelector("#captured-photo").appendChild(resultImg);
+                    } else {
+                        console.warn("overlay_base64_raw is missing from API response");
+                    }
+
+                    $('#scan-helper-text').text('Recomendation Ready!');
+                })
+                .catch(err => {
+                    console.error("Upload error:", err);
+                    $('#scan-helper-text').text('Error. Please try again.');
+                    
+                    setTimeout(() => {
+                        startCapture = false;
+                        lookedRight = false;
+                        lookedLeft = false;
+                        lookedStraight = false;
+                        currentStepIndex = 0;
+                        capturedImages = [];
+                        
+                        if (typeof scanSteps !== "undefined" && scanSteps[currentStepIndex]) {
+                            $('#scan-helper-text').text(scanSteps[currentStepIndex].text);
+                        } else {
+                            $('#scan-helper-text').text("Start Scan");
+                        }
+                        
+                        $('#scan-progress').css('width', '0%');
+                        $('#scan-btn').css('pointer-events', 'all').html('Start Scan');
+                    }, 3000);
+                });
+            } else {
+                const warningMsg = document.createElement("div");
+                warningMsg.textContent = "Could not capture all required angles. Please try again.";
+                Object.assign(warningMsg.style, {
+                    color: "#ff8800",
+                    textAlign: "center",
+                    margin: "20px 0"
+                });
+                photoContainer.appendChild(warningMsg);
+            }
+        } else {
+            console.log("Images already processed previously.");
+        }
+    } catch (err) {
+        console.error("Error in completeScan():", err);
+        alert("An unexpected error occurred during scan completion");
+
+        const fallback = document.createElement("div");
+        fallback.textContent = "Unexpected error. Please try again.";
+        Object.assign(fallback.style, {
+            color: "#ff4444",
+            textAlign: "center",
+            margin: "20px 0"
+        });
+        document.querySelector("#captured-photo").appendChild(fallback);
+    }
+}
+
+// ===== QR CODE FUNCTIONS =====
+function closePopup() {
+    const qrPopup = document.getElementById("qr-popup");
+    qrPopup.classList.remove("show");
+    qrPopup.classList.add("hide");
+
+    if (html5QrCode) {
+        html5QrCode.stop().catch(err => console.warn("Gagal stop kamera:", err));
+    }
+
+    setTimeout(() => {
+        qrPopup.style.display = "none";
+    }, 300);
+}
+
+// ===== THREE.JS FUNCTIONS =====
+function initThreeScene() {
+    const loader = new THREE.GLTFLoader();
+    const textureLoader = new THREE.TextureLoader();
+    const texturePath = data_global_texture;
+    const texture = textureLoader.load(texturePath, () => {
+        texture.flipY = false;
+        texture.encoding = THREE.sRGBEncoding;
+    });
+
+    let modelGroup;
+    let allGroups = [];
+
+    function loadFace(scene, onLoaded) {
+        loader.load('./assets/models/Head_Diterusin.glb', (gltf) => {
+            const faceModel = gltf.scene;
+            faceModel.position.set(0, -2.675, 0);
+            faceModel.scale.set(3, 2.8, 3);
+
+            const group = new THREE.Group();
+            group.add(faceModel);
+            scene.add(group);
+
+            faceModel.traverse((child) => {
+                if (child.isMesh) {
+                    if (child.material) {
+                        child.material.map = texture;
+                    } else {
+                        child.material = new THREE.MeshStandardMaterial({
+                            map: texture,
+                            roughness: 1.0,
+                            metalness: 0.0,
+                            transparent: true,
+                            side: THREE.DoubleSide,
+                        });
+                    }
+                    child.material.needsUpdate = true;
+                }
+            });
+
+            allGroups.push(group);
+            onLoaded(group);
+        });
+    }
+
+    function loadHairstyle(group, path) {
+        loader.load(path, (gltf) => {
+            const hair = gltf.scene;
+            hair.position.set(0, -3.045, 0.01);
+            hair.scale.set(3, 3, 3);
+            hair.traverse((child) => {
+                if (child.isMesh) {
+                    if (!child.material) {
+                        child.material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+                    }
+                    child.material.transparent = true;
+                    child.material.side = THREE.FrontSide;
+                    child.material.alphaTest = 0.5;
+                    child.material.depthWrite = true;
+                    child.material.depthTest = true;
+                    child.renderOrder = 1;
+                    child.geometry.computeVertexNormals();
+                }
+            });
+
+            if (group) {
+                const oldHair = group.children.filter(c => c.name === 'hair');
+                oldHair.forEach(h => group.remove(h));
+
+                hair.name = 'hair';
+                group.add(hair);
+            }
+        });
+    }
+
+    function createScene(canvasId, defaultHairPath, isMain = false) {
+        const scene = new THREE.Scene();
+        scene.background = null;
+        const camera = new THREE.PerspectiveCamera(60, 700 / 450, 0.1, 100);
+        camera.position.set(0, 2, 2);
+        const canvas = document.getElementById(canvasId);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true,
+            preserveDrawingBuffer: true
+        });
+        renderer.setSize(700, 450);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        dirLight.position.set(0, 10, 10);
+        scene.add(dirLight);
+
+        const dirLightBottom = new THREE.DirectionalLight(0xffffff, 0.2);
+        dirLightBottom.position.set(0, -5, 10);
+        scene.add(dirLightBottom);
+
+        const backLight = new THREE.DirectionalLight(0xffffff, 0.3);
+        backLight.position.set(0, 5, -10);
+        scene.add(backLight);
+
+        scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.enableZoom = false;
+        controls.enablePan = false;
+        controls.enableRotate = false;
+        controls.target.set(0, 2, 0);
+
+        loadFace(scene, (group) => {
+            if (defaultHairPath) loadHairstyle(group, defaultHairPath);
+            if (isMain) modelGroup = group;
+        });
+
+        return { scene, camera, renderer, controls };
+    }
+
+    const view1 = createScene('renderCanvas1', '/assets/models/Quiff.glb', true);
+    const view2 = createScene('renderCanvas2', '/assets/models/Layered.glb');
+    const view3 = createScene('renderCanvas3', '/assets/models/SlickBack.glb');
+
+    function animate() {
+        requestAnimationFrame(animate);
+        [view1, view2, view3].forEach(view => {
+            view.controls.update();
+            view.renderer.render(view.scene, view.camera);
+        });
+    }
+    animate();
+
+    const btnLeft = document.getElementById("btnLeft");
+    const btnRight = document.getElementById("btnRight");
+    
+    const minRotation = -Math.PI / 9;
+    const maxRotation =  Math.PI / 9;
+
+    btnLeft.addEventListener("click", () => {
+        allGroups.forEach(g => {
+            g.rotation.y = THREE.MathUtils.clamp(g.rotation.y + 0.2, minRotation, maxRotation);
+        });
+    });
+    
+    btnRight.addEventListener("click", () => {
+        allGroups.forEach(g => {
+            g.rotation.y = THREE.MathUtils.clamp(g.rotation.y - 0.2, minRotation, maxRotation);
+        });
+    });
+
+    $('.hairstyle-item').click(function () {
+        const index = $(this).data('model-index');
+        const files = [
+            '/assets/models/Quiff.glb',
+            '/assets/models/Layered.glb',
+            '/assets/models/SlickBack.glb'
+        ];
+
+        const names = ['QUIFF', 'LAYERED', 'SLICK BACK'];
+        const images = [
+            './assets/images/hair-powder.png',
+            './assets/images/pomade-matte.png',
+            './assets/images/pomade-sleek.png'
+        ];
+
+        const texts = [
+            'KAHF VOLUMIZED <br> SUAVE HAIR <br> POWDER',
+            'KAHF MATTE <br> DAPPER WATER <br> BASED POMADE',
+            'KAHF SLEEK <br> CLASSY WATER <br> BASED POMADE'
+        ];
+
+        if (modelGroup) loadHairstyle(modelGroup, files[index]);
+
+        $('.hairstyle-item').removeClass('active');
+        $(this).addClass('active');
+
+        $('.hairstyle-name-2').html(names[index]);
+        
+        $('#prod-img').attr('src', images[index]);
+        $('#prod-text').html(texts[index]); 
+
+        $('.model-img-wrapper').removeClass('active');
+        $('.model-img.model-img-wrapper').addClass('active');
+    });
+}
+
+// ===== EVENT LISTENERS =====
+document.addEventListener("DOMContentLoaded", function() {
+    // Load user photo
+    window.addEventListener("DOMContentLoaded", loadYourPhoto);
+
+    // QR code functionality
+    const qrPopup = document.getElementById("qr-popup");
+    const openQrBtn = document.getElementById("button-scan-qr");
+    const closeQrBtn = document.querySelector(".qr-close");
+
+    openQrBtn.addEventListener("click", () => {
+        qrPopup.style.display = "flex";
+        qrPopup.classList.remove("hide");
+        qrPopup.classList.add("show");
+
+        html5QrCode = new Html5Qrcode("qr-reader");
+
+        html5QrCode.start(
+            { facingMode: "user" },
+            {
+                fps: 10,
+                qrbox: 250
+            },
+            (decodedText) => {
+                console.log(`QR Code hasil: ${decodedText}`);
+                html5QrCode.stop().then(() => {
+                    closePopup();
+                    showScreen("homePageHair");
+                });
+            },
+            (errorMessage) => {
+                console.log("Scanning error:", errorMessage);
+            }
+        ).catch((err) => {
+            console.error("Tidak bisa akses kamera:", err);
+        });
+    });
+
+    closeQrBtn.addEventListener("click", closePopup);
+
+    window.addEventListener("click", (e) => {
+        if (e.target === qrPopup) {
+            closePopup();
+        }
+    });
+
+    // Question items
+    const questionItems = document.querySelectorAll(".question-list");
+    questionItems.forEach(item => {
+        item.addEventListener("click", () => {
+            questionItems.forEach(el => el.classList.remove("active"));
+            item.classList.add("active");
+            setTimeout(() => {
+                showScreen('loading');
+                setTimeout(() => {
+                    showScreen('hairstyle');
+                }, 60000);
+            }, 2000);
+        });
+    });
+
+    // Registration form
+    document.getElementById("regist-submit-btn").addEventListener("click", function() {
+        const name = document.getElementById("name").value.trim();
+        const greeting = document.querySelector(".greeting");
+        const titleName = document.querySelector(".title-name");
+
+        if (name) {
+            registeredName = name.toUpperCase();
+            greeting.textContent = `HAI ${registeredName} !!!`;
+            titleName.textContent = `${registeredName}`;
+        } else {
+            greeting.textContent = "HAI !!!";
+            titleName.textContent = "";
+            registeredName = "";
+        }
+    });
+
+    // Form validation
+    const nameInput = document.getElementById("name");
+    const phoneInput = document.getElementById("phone");
+    const requiredCheckbox = document.getElementById("privacy-required");
+    const submitBtn = document.getElementById("regist-submit-btn");
+
+    nameInput.addEventListener("input", validateForm);
+    phoneInput.addEventListener("input", validateForm);
+    requiredCheckbox.addEventListener("change", validateForm);
+    validateForm();
+
+    // Download result
+    document.getElementById("download-result").addEventListener("click", function () {
+        const section = document.getElementById("product-hair-screen");
+        const userName = document.querySelector(".title-name").textContent.trim();
+        const safeName = userName ? userName.replace(/\s+/g, "_") : "user";
+        const fileName = `hairstyle_result_${safeName}.png`;
+        const skipIds = ["download-result", "finish-page-hair-product", "icon-back-white"];
+
+        domtoimage.toBlob(section, {
+            filter: function(node) {
+                return !skipIds.includes(node.id);
+            }
+        })
+        .then(function (blob) {
+            const link = document.createElement("a");
+            link.download = fileName;
+            link.href = URL.createObjectURL(blob);
+            link.click();
+        })
+        .catch(function (error) {
+            console.error("Download gagal:", error);
+        });
+    });
+
+    // Hair type selection
+    const hairTypeOptions = document.querySelectorAll('.question-list');
+    const resultCard = document.querySelector('.result-card');
+    const hairTypeDetail = document.querySelector('.hair-type-detail');
+    const resultImg = document.querySelector('.result-hair-type');
+
+    // --- After selecting a hair type ---
+    hairTypeOptions.forEach(option => {
+        option.addEventListener('click', async function() {
+            // Remove previous selections
+            hairTypeOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+
+            const selectedHairType = this.getAttribute('data-value');
+            hairTypeDetail.textContent = selectedHairType;
+            resultImg.setAttribute('src', hairTypeImages[selectedHairType]);
+            resultImg.setAttribute('alt', selectedHairType);
+            resultCard.style.display = 'block';
+
+            // --- Fetch the fuse-hair endpoint ---
+            try {
+                // Assume you already have the center face URL from /api/upload-face
+                const centerFaceGo = centerFace; 
+
+                const response = await fetch("/api/fuse-hair", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        center_face_base64: centerFaceGo,
+                        hair_type: selectedHairType
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.hairfastgan_results.length > 0) {
+                    // For example, display the first fused result
+                    const fusedResult = data.hairfastgan_results[0];
+                    resultImg.setAttribute('src', fusedResult.fused_url); // or fused_base64
+                    resultImg.setAttribute('alt', fusedResult.name);
+                } else {
+                    console.warn("No fused results returned", data);
+                }
+            } catch (err) {
+                console.error("Failed to fetch fuse-hair:", err);
+            }
+        });
+    });
+
+
+    // Hairstyle selection
+    document.addEventListener("click", function(e) {
+        const hairstyleItem = e.target.closest(".hairstyle-item");
+        if (hairstyleItem) {
+            const hairStyleNameElement = hairstyleItem.querySelector(".hairstyle-name");
+            if (hairStyleNameElement) {
+                selectedHairStyleName = hairStyleNameElement.textContent;
+                document.querySelectorAll(".hairstyle-item").forEach(item => {
+                    item.classList.remove("active");
+                });
+                hairstyleItem.classList.add("active");
+            }
+        }
+    });
+
+    // Product selection
+    $(".model-img-wrapper").on("click", function () {
+        let index;
+
+        if($(this).hasClass('model-img')) {
+            const activeItem = $('.hairstyle-item.active');
+            if(activeItem.length) {
+                index = parseInt(activeItem.data('model-index'));
+            } else {
+                console.warn("belum ada model yang di pilih!");
+                return;
+            }
+        } else {
+            index = parseInt($(this).attr('data-index'));
+        }
+        
+        updateProduct(index);
+        $(".model-img-wrapper").removeClass("active");
+        $(".model-img.model-img-wrapper").removeClass("active");
+        $(this).addClass("active");
+    });
+
+    // Continue to product screen
+    const continueButton = document.getElementById("hairstyle-continue-btn");
+    if (continueButton) {
+        continueButton.addEventListener("click", function() {
+            updateProductScreen();
+            showScreen('product');
+        });
+    }
+
+    // Canvas capture
+    document.getElementById('hairstyle-continue-btn').addEventListener('click', captureCanvas);
+});
+
+</script>
+
+<script type="module" src="/assets/js/ui.js"></script>
+
+</body>
+
+</html>

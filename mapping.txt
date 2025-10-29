@@ -1,0 +1,134 @@
+const hairstyleFiles = {
+    "Oval": {
+    "STRAIGHT": [
+      { model: '/assets/models/3D HNC/OVAL/Straight/Oval_Straight_01.glb', name: 'BUZZ CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/OVAL/Straight/Oval_Straight_02.glb', name: 'TAPER FADE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/OVAL/Straight/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/OVAL/Straight/Oval_Straight_03.glb', name: 'TEXTURED QUIFF', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/3D HNC/OVAL/Wavy/Oval_Wavy_01.glb', name: 'LAYERED WAVES', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/OVAL/Wavy/Oval_Wavy_02.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/OVAL/Wavy/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/OVAL/Wavy/Oval_Wavy_03.glb', name: 'SIDE PART', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/3D HNC/OVAL/Curly/Oval_Curly_01 FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/OVAL/Curly/Oval_Curly_02.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/OVAL/Curly/diamond_Curly_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/OVAL/Curly/Oval_Curly_03.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    // "TIGHT CURLY": [
+    //   { model: '/assets/models/3D HNC/OVAL/Wavy/diamond_wavy_01 FrenchCrop.glb', name: 'QUIFF', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+    //   { model: '/assets/models/3D HNC/OVAL/Wavy/diamond_wavy_02_.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/OVAL/Wavy/diamond_wavy_02 SideSwept.glb'
+    //   { model: '/assets/models/3D HNC/OVAL/Wavy/diamond_wavy_03 TexturedWaves.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    // ]
+  },
+  "Diamond": {
+    "STRAIGHT": [
+      { model: '/assets/models/3D HNC/DIAMOND/Straight/Diamond_Straight_01.glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/DIAMOND/Straight/Diamond_Straight_02.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/DIAMOND/Straight/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/DIAMOND/Straight/Diamond_Straight_03.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/3D HNC/DIAMOND/Wavy/Diamond_Wavy_01 FrenchCrop.glb', name: 'QUIFF', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/DIAMOND/Wavy/Diamond_Wavy_02_.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/DIAMOND/Wavy/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/DIAMOND/Wavy/Diamond_Wavy_03 TexturedWaves.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/3D HNC/DIAMOND/Curly/Diamond_Curly_01.glb', name: 'QUIFF', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/DIAMOND/Curly/Diamond_Curly_02.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/DIAMOND/Curly/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/DIAMOND/Curly/Diamond_Curly_03.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    // "TIGHT CURLY": [
+    //   { model: '/assets/models/3D HNC/DIAMOND/Wavy/diamond_wavy_01 FrenchCrop.glb', name: 'QUIFF', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+    //   { model: '/assets/models/3D HNC/DIAMOND/Wavy/diamond_wavy_02_.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/DIAMOND/Wavy/diamond_wavy_02 SideSwept.glb'
+    //   { model: '/assets/models/3D HNC/DIAMOND/Wavy/diamond_wavy_03 TexturedWaves.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    // ]
+  },
+  "Oblong": {
+    "STRAIGHT": [
+      { model: '/assets/models/3D HNC/OBLONG/Straight/Oblong_Straight_CrewCut.glb', name: 'CREW CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/OBLONG/Straight/Oblong_Straight_SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/OBLONG/Straight/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/OBLONG/Straight/Oblong_Straight_SlickBack.glb', name: 'SLICK BACK', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/3D HNC/OBLONG/Wavy/Oblong_Wavy_CrewCut.glb', name: 'CREW CUT', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/OBLONG/Wavy/Oblong_Wavy_SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/OBLONG/Wavy/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/OBLONG/Wavy/Oblong_Wavy_TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/3D HNC/OBLONG/Curly/Oblong_Curly_Fringe.glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/OBLONG/Curly/Oblong_Curly_LowTapper.glb', name: 'LOW TAPPER', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/OBLONG/Curly/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/OBLONG/Curly/Oblong_Curly_MediumCurls.glb', name: 'MEDIUM CURLS', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    // "TIGHT CURLY": [
+    //   { model: '/assets/models/3D HNC/OBLONG/Wavy/diamond_wavy_01 FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+    //   { model: '/assets/models/3D HNC/OBLONG/Wavy/diamond_wavy_02_.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/OBLONG/Wavy/diamond_wavy_02 SideSwept.glb'
+    //   { model: '/assets/models/3D HNC/OBLONG/Wavy/diamond_wavy_03 TexturedWaves.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    // ]
+  },
+  "Square": {
+    "STRAIGHT": [
+      { model: '/assets/models/3D HNC/RECTANGLE/Straight/Rectangle_Straight_CombOver.glb', name: 'COMB OVER', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/RECTANGLE/Straight/Rectangle_Straight_SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D HNC/RECTANGLE/Straight/Rectangle_Straight_SlickBack.glb', name: 'SLICK BACK', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/3D HNC/RECTANGLE/Wavy/Rectangle_Wavy_Layered.glb', name: 'LAYERED', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/RECTANGLE/Wavy/Rectangle_Wavy_MediumLengthTaper.glb', name: 'MEDIUM LENGTH TAPER', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/RECTANGLE/Wavy/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/RECTANGLE/Wavy/Rectangle_Wavy_SideSwept.glb', name: 'SIDE SWEPT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/3D HNC/RECTANGLE/Curly/Rectangle_Curly_Fringe.glb', name: 'FRINGE', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/RECTANGLE/Curly/Rectangle_Curly_ShortTapered.glb', name: 'SHORT TAPERED', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/RECTANGLE/Curly/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/RECTANGLE/Curly/Rectangle_Curly_Undercut.glb', name: 'UNDERCUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    // "TIGHT CURLY": [
+    //   { model: '/assets/models/3D HNC/RECTANGLE/Wavy/diamond_wavy_01 FrenchCrop.glb', name: 'QUIFF', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+    //   { model: '/assets/models/3D HNC/RECTANGLE/Wavy/diamond_wavy_02_.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/RECTANGLE/Wavy/diamond_wavy_02 SideSwept.glb'
+    //   { model: '/assets/models/3D HNC/RECTANGLE/Wavy/diamond_wavy_03 TexturedWaves.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    // ]
+  },
+  "Round": {
+    "STRAIGHT": [
+      { model: '/assets/models/3D HNC/ROUND/Straight/Round_Straight_Caesar.glb', name: 'CAESAR', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/ROUND/Straight/Round_Straight_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/ROUND/Straight/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/ROUND/Straight/Round_Straight_Pompadour.glb', name: 'POMPADOUR', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/3D HNC/ROUND/Wavy/Round_Wavy_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/ROUND/Wavy/Round_Wavy_Fringe.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/ROUND/Wavy/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/ROUND/Wavy/Round_Wavy_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/3D HNC/ROUND/Curly/Round_Curly_MulletModern.glb', name: 'MULLET MODERN', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/ROUND/Curly/Round_Curly_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D HNC/ROUND/Curly/Round_Curly_TaperFade.glb', name: 'TAPER FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    // "TIGHT CURLY": [
+    //   { model: '/assets/models/3D HNC/ROUND/Wavy/diamond_wavy_01 FrenchCrop.glb', name: 'QUIFF', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+    //   { model: '/assets/models/3D HNC/ROUND/Wavy/diamond_wavy_02_.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/ROUND/Wavy/diamond_wavy_02 SideSwept.glb'
+    //   { model: '/assets/models/3D HNC/ROUND/Wavy/diamond_wavy_03 TexturedWaves.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    // ]
+  },
+  "Triangle": {
+    "STRAIGHT": [
+      { model: '/assets/models/3D HNC/TRIANGLE/Straight/Triangle_Straight_MediumLengthSidePart.glb', name: 'MEDIUM LENGTH SIDE PART', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/TRIANGLE/Straight/Triangle_Straight_Quiff.glb', name: 'QUIFF', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/TRIANGLE/Straight/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/TRIANGLE/Straight/Triangle_Straight_SpikyCut.glb', name: 'SPIKY CUT', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "WAVY": [
+      { model: '/assets/models/3D HNC/TRIANGLE/Wavy/Triangle_Wavy_FrenchCrop.glb', name: 'FRENCH CROP', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/TRIANGLE/Wavy/Triangle_Wavy_MediumLengthWaves', name: 'MEDIUM LENGTH WAVES', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/TRIANGLE/Wavy/diamond_wavy_02 SideSwept.glb'
+      { model: '/assets/models/3D HNC/TRIANGLE/Wavy/Triangle_Wavy_SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    "CURLY": [
+      { model: '/assets/models/3D HNC/TRIANGLE/Curly/Triangle_Curly_HighTopCurls.glb', name: 'HIGH TOP CURLS', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+      { model: '/assets/models/3D HNC/TRIANGLE/Curly/Triangle_Curly_SidePart.glb', name: 'SIDE PART', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' },
+      { model: '/assets/models/3D HNC/TRIANGLE/Curly/Triangle_Curly_TaperedFade.glb', name: 'TAPERED FADE', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    ],
+    // "TIGHT CURLY": [
+    //   { model: '/assets/models/3D HNC/TRIANGLE/Wavy/diamond_wavy_01 FrenchCrop.glb', name: 'QUIFF', img: './assets/images/hair-powder.png', alt: "Kahf",text: 'KAHF VOLUMIZED SUAVE <br> HAIR POWDER' },
+    //   { model: '/assets/models/3D HNC/TRIANGLE/Wavy/diamond_wavy_02_.glb', name: 'FRINGE', img: './assets/images/pomade-matte.png', alt: "Kahf",text: 'KAHF MATTE DAPPER <br> WATER BASED POMADE' }, //ganti ini nunggu model '/assets/models/3D HNC/TRIANGLE/Wavy/diamond_wavy_02 SideSwept.glb'
+    //   { model: '/assets/models/3D HNC/TRIANGLE/Wavy/diamond_wavy_03 TexturedWaves.glb', name: 'FRENCH CROP', img: './assets/images/pomade-sleek.png', alt: "Kahf",text: 'KAHF SLEEK CLASSY <br> WATER BASED POMADE' }
+    // ]
+  },
+}
