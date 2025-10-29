@@ -1,226 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kahf Decode | AI Hair Analyzer</title>
-    <link rel="stylesheet" href="src/css/styles.css">
-</head>
+    <link rel="stylesheet" href="src/css/styles.css" />
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <!-- Logo Section -->
-        <div class="logo-section">
-            <img src="public/assets/images/logo.png" alt="Kahf Decode Logo">
+      <!-- Logo Section -->
+      <div class="logo-section">
+        <img src="public/assets/images/logo.png" alt="Kahf Decode Logo" />
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <img
+          src="public/assets/images/home-ai-hair.png"
+          alt="AI Hair Analyzer"
+          class="ai-analyzer-img"
+        />
+
+        <!-- Scan Button -->
+        <div class="scan-section">
+          <button class="btn-scan" id="openQRModal">SCAN QR</button>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <img src="public/assets/images/home-ai-hair.png" alt="AI Hair Analyzer" class="ai-analyzer-img">
-
-            <!-- Scan Button -->
-            <div class="scan-section">
-                <button class="btn-scan" id="openQRModal">SCAN QR</button>
-            </div>
-
-            <!-- Bottom Link -->
-            <div class="bottom-section">
-                NO QR CODE? <a href="#" id="openModal">FILL FORM HERE</a>
-            </div>
+        <!-- Bottom Link -->
+        <div class="bottom-section">
+          NO QR CODE? <a href="#" id="openModal">FILL FORM HERE</a>
         </div>
+      </div>
     </div>
 
     <!-- Modal Register -->
     <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <img src="public/assets/images/logo.png" alt="Kahf Decode" class="modal-logo">
-                <div class="modal-title">REGISTER TO CODE</div>
-            </div>
-
-            <div class="modal-body">
-                <form id="registerForm">
-                    <div class="form-gradient">
-                        <div class="form-group">
-                            <label class="form-label">Full Name</label>
-                            <input type="text" class="form-input" placeholder="Enter your full name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Whatsapp Number</label>
-                            <input type="tel" class="form-input" placeholder="Enter your WhatsApp number" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Age</label>
-                            <input type="number" class="form-input" placeholder="Enter your age" required>
-                        </div>
-                    </div>
-
-                    <div class="checkbox-section">
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="privacy">
-                                <span>See our Privacy Policy for more information.</span>
-                            </label>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="promo">
-                                <span>I agree receive promotional and further information from Kahf</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="button-section">
-                        <button type="submit" class="btn-next" id="btnNext">NEXT</button>
-                    </div>
-                </form>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <img
+            src="public/assets/images/logo.png"
+            alt="Kahf Decode"
+            class="modal-logo"
+          /> -->
+          <div class="modal-title">REGISTER TO CODE</div>
         </div>
+
+        <div class="modal-body">
+          <form id="registerForm">
+            <div class="form-gradient">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-input"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Whatsapp Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-input"
+                  placeholder="Enter your WhatsApp number"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Age</label>
+                <input
+                  type="number"
+                  id="age"
+                  class="form-input"
+                  placeholder="Enter your age"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="checkbox-section">
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="privacy" />
+                  <span
+                    >See our
+                    <a
+                      target="_blank"
+                      href="https://www.kahfeveryday.com/en/terms-conditions/"
+                      >Privacy Policy</a
+                    >
+                    for more information.</span
+                  >
+                </label>
+              </div>
+
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="promo" />
+                  <span
+                    >I agree receive promotional and further information from
+                    Kahf</span
+                  >
+                </label>
+              </div>
+            </div>
+
+            <div class="button-section">
+              <button type="submit" class="btn-next" id="btnNext">NEXT</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <!-- Modal QR Scanner -->
     <div class="modal" id="qrModal">
-        <div class="qr-modal-content">
-            <div class="qr-modal-header">
-                <div class="qr-modal-title">KAHF DECODE QR CODE</div>
-            </div>
-
-            <div class="qr-scanner-area">
-                <div class="qr-icon">
-                    <img src="public/assets/images/camera-qr.png" alt="QR Camera">
-                </div>
-
-                <div class="qr-instruction">
-                    TO CONTINUE, SHOW YOUR QR CODE<br>TO THE CAMERA
-                </div>
-
-                <button class="qr-scan-button" id="startScan">SCAN QR</button>
-
-                <div class="qr-footer">
-                    NO QR CODE? <a href="#" id="openModalFromQR">FILL FORM HERE</a>
-                </div>
-            </div>
+      <div class="qr-modal-content">
+        <div class="qr-modal-header">
+          <div class="qr-modal-title">KAHF DECODE QR CODE</div>
         </div>
+
+        <div class="qr-scanner-area">
+          <div class="qr-icon">
+            <img src="public/assets/images/camera-qr.png" alt="QR Camera" />
+          </div>
+
+          <div class="qr-instruction">
+            TO CONTINUE, SHOW YOUR QR CODE<br />TO THE CAMERA
+          </div>
+
+          <button class="qr-scan-button" id="startScan">SCAN QR</button>
+
+          <div class="qr-footer">
+            NO QR CODE? <a href="#" id="openModalFromQR">FILL FORM HERE</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Modal Important Information -->
     <div class="modal" id="infoModal">
-        <div class="info-modal-content">
-            <div class="info-modal-header">
-                <div class="info-modal-title">IMPORTANT INFORMATION</div>
-            </div>
-
-            <div class="info-modal-body">
-                <div class="welcome-section">
-                    <div class="welcome-title">WELCOME TO AI HAIRSTYLE CODE</div>
-                    <div class="welcome-text">
-                        If you upload a selfie, the image will be used to provide more precise recommendations that may
-                        be of interest to you. The image is deleted after being analyzed.
-                    </div>
-                </div>
-
-                <div class="how-it-works-section">
-                    <div class="how-it-works-title">HOW IT WORKS</div>
-
-                    <div class="step-item">
-                        <div class="step-icon">
-                            <img src="public/assets/images/ii-scan.png" alt="Scan">
-                        </div>
-                        <div class="step-content">
-                            <div class="step-title">Scan</div>
-                            <div class="step-description">Look at the camera for 5 seconds.</div>
-                        </div>
-                    </div>
-
-                    <div class="step-item">
-                        <div class="step-icon">
-                            <img src="public/assets/images/ii-analyze.png" alt="Analyze">
-                        </div>
-                        <div class="step-content">
-                            <div class="step-title">Analyze</div>
-                            <div class="step-description">AI checks oil/dryness, sensitivity, pores & spots.</div>
-                        </div>
-                    </div>
-
-                    <div class="step-item">
-                        <div class="step-icon">
-                            <img src="public/assets/images/ii-recommend.png" alt="Recommend">
-                        </div>
-                        <div class="step-content">
-                            <div class="step-title">Recommend</div>
-                            <div class="step-description">Get the right Kahf products for your skin.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-button-section">
-                    <button class="btn-continue" id="btnContinue">CONTINUE</button>
-                </div>
-            </div>
+      <div class="info-modal-content">
+        <div class="info-modal-header">
+          <div class="info-modal-title">IMPORTANT INFORMATION</div>
         </div>
+
+        <div class="info-modal-body">
+          <div class="welcome-section">
+            <div class="welcome-title">WELCOME TO AI HAIRSTYLE CODE</div>
+            <div class="welcome-text">
+              If you upload a selfie, the image will be used to provide more
+              precise recommendations that may be of interest to you. The image
+              is deleted after being analyzed.
+            </div>
+          </div>
+
+          <div class="how-it-works-section">
+            <div class="how-it-works-title">HOW IT WORKS</div>
+
+            <div class="step-item">
+              <div class="step-icon">
+                <img src="public/assets/images/ii-scan.png" alt="Scan" />
+              </div>
+              <div class="step-content">
+                <div class="step-title">Scan</div>
+                <div class="step-description">
+                  Look at the camera for 5 seconds.
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-icon">
+                <img src="public/assets/images/ii-analyze.png" alt="Analyze" />
+              </div>
+              <div class="step-content">
+                <div class="step-title">Analyze</div>
+                <div class="step-description">
+                  AI checks oil/dryness, sensitivity, pores & spots.
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-icon">
+                <img
+                  src="public/assets/images/ii-recommend.png"
+                  alt="Recommend"
+                />
+              </div>
+              <div class="step-content">
+                <div class="step-title">Recommend</div>
+                <div class="step-description">
+                  Get the right Kahf products for your skin.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-button-section">
+            <button class="btn-continue" id="btnContinue">CONTINUE</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Modal Follow Instruction -->
     <div class="modal" id="instructionModal">
-        <div class="instruction-modal-content">
-            <div class="instruction-modal-header">
-                <div class="instruction-modal-title">FOLLOW THE INSTRUCTION</div>
-            </div>
-
-            <div class="instruction-modal-body">
-                <div class="instruction-icons-section">
-                    <div class="instruction-icons-grid">
-                        <div class="instruction-item">
-                            <div class="instruction-icon">
-                                <img src="public/assets/images/removeglasses.png" alt="Remove glasses">
-                            </div>
-                            <div class="instruction-label">Remove your glassess</div>
-                        </div>
-
-                        <div class="instruction-item">
-                            <div class="instruction-icon">
-                                <img src="public/assets/images/pullbackhair.png" alt="Pull back hair">
-                            </div>
-                            <div class="instruction-label">Pullback your hair</div>
-                        </div>
-
-                        <div class="instruction-item">
-                            <div class="instruction-icon">
-                                <img src="public/assets/images/faceatcamera.png" alt="Face at camera">
-                            </div>
-                            <div class="instruction-label">Face directly at camera</div>
-                        </div>
-
-                        <div class="instruction-item">
-                            <div class="instruction-icon">
-                                <img src="public/assets/images/neutralface.png" alt="Neutral face">
-                            </div>
-                            <div class="instruction-label">Keep neutral expression</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="instruction-info-section">
-                    <div class="instruction-checkbox">
-                        <input type="checkbox" id="agreeInstruction">
-                        <div class="instruction-checkbox-text">
-                            If you upload a selfie, the image will be used to provide more precise recommendations that
-                            may be of interest to you. The image is deleted after being analyzed.<br><br>
-                            See our <a href="#">Privacy Policy</a> for more information.
-                        </div>
-                    </div>
-
-                    <button class="btn-understand" id="btnUnderstand">YES, I UNDERSTAND</button>
-                </div>
-            </div>
+      <div class="instruction-modal-content">
+        <div class="instruction-modal-header">
+          <div class="instruction-modal-title">FOLLOW THE INSTRUCTION</div>
         </div>
+
+        <div class="instruction-modal-body">
+          <div class="instruction-icons-section">
+            <div class="instruction-icons-grid">
+              <div class="instruction-item">
+                <div class="instruction-icon">
+                  <img
+                    src="public/assets/images/removeglasses.png"
+                    alt="Remove glasses"
+                  />
+                </div>
+                <div class="instruction-label">Remove your glassess</div>
+              </div>
+
+              <div class="instruction-item">
+                <div class="instruction-icon">
+                  <img
+                    src="public/assets/images/pullbackhair.png"
+                    alt="Pull back hair"
+                  />
+                </div>
+                <div class="instruction-label">Pullback your hair</div>
+              </div>
+
+              <div class="instruction-item">
+                <div class="instruction-icon">
+                  <img
+                    src="public/assets/images/faceatcamera.png"
+                    alt="Face at camera"
+                  />
+                </div>
+                <div class="instruction-label">Face directly at camera</div>
+              </div>
+
+              <div class="instruction-item">
+                <div class="instruction-icon">
+                  <img
+                    src="public/assets/images/neutralface.png"
+                    alt="Neutral face"
+                  />
+                </div>
+                <div class="instruction-label">Keep neutral expression</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="instruction-info-section">
+            <div class="instruction-checkbox">
+              <input type="checkbox" id="agreeInstruction" />
+              <div class="instruction-checkbox-text">
+                If you upload a selfie, the image will be used to provide more
+                precise recommendations that may be of interest to you. The
+                image is deleted after being analyzed.<br /><br />
+                See our <a href="#">Privacy Policy</a> for more information.
+              </div>
+            </div>
+
+            <button class="btn-understand" id="btnUnderstand">
+              YES, I UNDERSTAND
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="src/js/app.js" defer></script>
-</body>
-
+  </body>
 </html>
